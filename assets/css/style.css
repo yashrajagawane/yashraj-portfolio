@@ -516,83 +516,122 @@ h1, h2, h3, h4, h5, h6 {
 /* ----------------------
    About Section
 ---------------------- */
+/* REPLACE YOUR EXISTING "About Section" CSS WITH THIS */
+
 .about-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
 }
 
+/* Enhanced Text Styling */
 .about-text p {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  transition: color 0.3s ease;
 }
 
+.about-text p:hover {
+  color: #ffffff; /* Brightens text when hovering over the paragraph */
+}
+
+/* Highlighted keywords */
+.highlight {
+  color: var(--accent-secondary, #ff7a7a);
+  font-weight: 500;
+  transition: text-shadow 0.3s ease;
+}
+
+.about-text p:hover .highlight {
+  text-shadow: 0 0 10px rgba(255, 122, 122, 0.4);
+}
+
+/* Profile Card - Hover Lift & Glow */
 .profile-card {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 59, 59, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 59, 59, 0.15);
 }
 
 .profile-glow {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,59,59,0.1) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,59,59,0.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
 .profile-card:hover .profile-glow {
-    opacity: 1;
+  opacity: 1;
 }
 
 .profile-content h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.4rem;
-    border-bottom: 1px solid var(--card-border);
-    padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 1rem;
 }
 
 .profile-list li {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
+/* Fixed Label alignment and spacing */
 .profile-list .label {
-    display: block;
-    color: var(--accent-primary);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--accent-primary);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
 }
 
 .profile-list .value {
-    color: var(--text-primary);
+  color: var(--text-primary);
+  display: block;
+  padding-left: 1.8rem; /* Indents text cleanly under the icon */
 }
 
+/* Interests Tags - Redesigned to match Tech Stack tags */
 .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-left: 1.8rem;
 }
 
 .tag {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-fast);
+  background: rgba(255, 59, 59, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 59, 59, 0.15);
+  color: #d1d5db;
+  transition: all 0.3s ease;
+  cursor: default;
 }
 
 .tag:hover {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-    background: rgba(255, 59, 59, 0.05);
+  transform: scale(1.08);
+  border-color: rgba(255, 59, 59, 0.8);
+  box-shadow: 0 0 10px rgba(255, 59, 59, 0.3);
+  color: #ffffff;
+  background: rgba(255, 59, 59, 0.15);
 }
-
 /* ==========================
    TECHNICAL SKILLS SECTION
 ========================== */
@@ -756,8 +795,6 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 100;
     opacity: 1 !important;
 }
-
-
 
 
 /* ==========================
