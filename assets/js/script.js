@@ -45,32 +45,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Generate Mock GitHub Graph
-const constructGraph = () => {
-    const graphContainer = document.getElementById('contribution-graph');
-    if(!graphContainer) return;
-    
-    // Create 156 cells (approx 3 months of data for visual)
-    for (let i = 0; i < 156; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('graph-cell');
-        
-        // Random level for mock data visualization
-        const rand = Math.random();
-        let level = 0;
-        if (rand > 0.5) level = 1;
-        if (rand > 0.7) level = 2;
-        if (rand > 0.85) level = 3;
-        if (rand > 0.95) level = 4;
-        
-        if (level > 0) {
-            cell.setAttribute('data-level', level);
-        }
-        
-        graphContainer.appendChild(cell);
-    }
-}
-constructGraph();
 
 // Contact Form submission
 const contactForm = document.getElementById('contact-form');
@@ -155,6 +129,7 @@ if (typeof ScrollReveal !== 'undefined') {
     ScrollReveal().reveal('.hero-text, .about-text', { delay: 300, origin: 'left' });
     ScrollReveal().reveal('.hero-visual, .profile-card', { delay: 300, origin: 'right' });
     ScrollReveal().reveal('.skill-category, .project-card, .github-card', { delay: 200, origin: 'bottom', interval: 200 });
+        ScrollReveal().reveal('.experience-container', { delay: 200, origin: 'bottom', distance: '40px', duration: 1000 });
 }
 
 // Initialize tsParticles
