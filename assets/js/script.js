@@ -54,20 +54,66 @@ if(contactForm) {
         const btn = contactForm.querySelector('button');
         const originalText = btn.innerHTML;
         
+        // 1. Show "Sending..." with spinner
         btn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
         
-        setTimeout(() => {
-            btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
-            btn.style.background = '#ef4444'; // Soft red match
-            contactForm.reset();
-            
-            setTimeout(() => {
-                btn.innerHTML = originalText;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // 2. Prepare Data for Web3Forms
+        const formData = new FormData();
+        // 🛑 IMPORTANT: Replace 'YOUR_ACCESS_KEY_HERE' with the key you got in your email!
+        formData.append("access_key", "2180806b-af16-48e9-a989-ac0f8834ca0a"); 
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("message", message);
+
+        // 3. Send email in the background silently
+        fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        })
+        .then(async (response) => {
+            if (response.ok) {
+                // Success Animation
+                btn.innerHTML = '<span>Message Sent ✔</span>';
+                btn.style.background = '#10b981'; 
+                btn.style.borderColor = '#10b981';
+                btn.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.4)';
+                
+                contactForm.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.style.borderColor = '';
+                    btn.style.boxShadow = '';
+                }, 3000);
+            } else {
+                // If something goes wrong
+                btn.innerHTML = '<span>Error! Try Again</span> <i class="fas fa-times"></i>';
+                btn.style.background = '#ff3b3b';
+                setTimeout(() => { 
+                    btn.innerHTML = originalText; 
+                    btn.style.background = '';
+                }, 3000);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            btn.innerHTML = '<span>Error! Try Again</span> <i class="fas fa-times"></i>';
+            btn.style.background = '#ff3b3b';
+            setTimeout(() => { 
+                btn.innerHTML = originalText; 
                 btn.style.background = '';
             }, 3000);
-        }, 1500);
+        });
     });
 }
+
+// Global Check before initializing Typed.js
 
 // Global Check before initializing Typed.js
 if (typeof Typed !== 'undefined') {

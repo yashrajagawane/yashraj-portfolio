@@ -1037,7 +1037,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 /* ----------------------
    Contact Section
 ---------------------- */
@@ -1154,9 +1153,28 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
+/* --- UPDATED BUTTON & RESPONSE TIME LAYOUT --- */
+.form-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
 .submit-btn {
     align-self: flex-start;
-    margin-top: 1rem;
+}
+
+.form-response-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.form-response-time i {
+    color: var(--accent-primary);
 }
 
 /* ----------------------
