@@ -467,12 +467,55 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.95rem;
 }
 
+/* Terminal Input */
+
+.terminal-input-line{
+display:flex;
+align-items:center;
+margin-top:10px;
+gap:8px;
+}
+
+#terminal-input{
+background:transparent;
+border:none;
+outline:none;
+color:white;
+font-family:var(--font-mono);
+font-size:0.95rem;
+width:100%;
+}
+
+#terminal-output div{
+margin-bottom:5px;
+}
 .terminal-prompt {
     color: #27c93f;
 }
 
 .typed-terminal {
     color: var(--text-primary);
+}
+
+.terminal-prompt{
+color:#27c93f;
+white-space:nowrap;
+}
+
+.terminal-input-line{
+display:flex;
+align-items:center;
+gap:8px;
+flex-wrap:nowrap;
+}
+
+.terminal-input-line{
+display: none;
+}
+
+#terminal-input{
+flex:1;
+min-width:0;
 }
 
 /* Scroll Indication */

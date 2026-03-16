@@ -134,13 +134,32 @@ if (typeof Typed !== 'undefined') {
 
     // Initialize Typed.js for Terminal (Restored terminal boot sequence)
     new Typed('.typed-terminal', {
-        strings: [
-            'initializing portfolio system...<br>^500> loading AI projects...<br>^500> loading machine learning modules...<br>^500> <span style="color: var(--accent-primary)">developer profile ready.</span>'
-        ],
-        typeSpeed: 30,
-        showCursor: true,
-        cursorChar: '█',
-        loop: false
+    strings: [
+    'initializing portfolio system...<br>^500> loading AI projects...<br>^500> loading machine learning modules...<br>^500> <span style="color:#ff3b3b">developer profile ready.</span>'
+    ],
+    typeSpeed: 30,
+    showCursor: true,
+    cursorChar: '█',
+    loop: false,
+
+    onComplete: function(){
+
+    setTimeout(() => {
+
+    const inputLine = document.querySelector(".terminal-input-line");
+    const inputBox = document.getElementById("terminal-input");
+
+    if(inputLine){
+    inputLine.style.display = "flex";
+    }
+
+    if(inputBox){
+    inputBox.focus();
+    }
+
+    }, 300);
+
+    }
     });
 }
 
@@ -175,7 +194,7 @@ if (typeof ScrollReveal !== 'undefined') {
     ScrollReveal().reveal('.hero-text, .about-text', { delay: 300, origin: 'left' });
     ScrollReveal().reveal('.hero-visual, .profile-card', { delay: 300, origin: 'right' });
     ScrollReveal().reveal('.skill-category, .project-card, .github-card', { delay: 200, origin: 'bottom', interval: 200 });
-        ScrollReveal().reveal('.experience-container', { delay: 200, origin: 'bottom', distance: '40px', duration: 1000 });
+    ScrollReveal().reveal('.experience-container', { delay: 200, origin: 'bottom', distance: '40px', duration: 1000 });
 }
 
 // Initialize tsParticles
@@ -247,3 +266,172 @@ if (typeof tsParticles !== 'undefined') {
         detectRetina: true
     });
 }
+
+/* ===============================
+ADVANCED TERMINAL COMMAND SYSTEM
+(Command history + autocomplete)
+================================ */
+
+const terminalInput = document.getElementById("terminal-input");
+const terminalOutput = document.getElementById("terminal-output");
+
+if (terminalInput) {
+
+const commandList = [
+"github",
+"instagram",
+"linkedin",
+"whatsapp",
+"about",
+"skills",
+"projects",
+"experience",
+"contact",
+"help"
+];
+
+let history = [];
+let historyIndex = -1;
+
+terminalInput.addEventListener("keydown", function(e){
+
+/* ===============================
+ENTER → RUN COMMAND
+================================ */
+
+if(e.key === "Enter"){
+
+let command = terminalInput.value.trim().toLowerCase();
+
+if(command === "") return;
+
+history.push(command);
+historyIndex = history.length;
+
+terminalInput.value = "";
+
+/* SOCIAL LINKS */
+
+if(command === "github"){
+window.open("https://github.com/yashrajagawane","_blank");
+}
+
+else if(command === "instagram"){
+window.open("https://instagram.com","_blank");
+}
+
+else if(command === "linkedin"){
+window.open("https://linkedin.com/in/yashrajagawane","_blank");
+}
+
+else if(command === "whatsapp"){
+window.open("https://wa.me/","_blank");
+}
+
+/* SECTION NAVIGATION */
+
+else if(command === "about"){
+document.getElementById("about").scrollIntoView({behavior:"smooth"});
+}
+
+else if(command === "skills"){
+document.getElementById("skills").scrollIntoView({behavior:"smooth"});
+}
+
+else if(command === "projects"){
+document.getElementById("projects").scrollIntoView({behavior:"smooth"});
+}
+
+else if(command === "experience"){
+document.getElementById("experience").scrollIntoView({behavior:"smooth"});
+}
+
+else if(command === "contact"){
+document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+}
+
+/* HELP COMMAND */
+
+else if(command === "help"){
+
+terminalOutput.innerHTML += `
+<div>Available commands:</div>
+<div>- github, instagram, linkedin, whatsapp</div>
+<div>- about, skills, projects, experience, contact</div>
+`;
+
+terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+}
+
+/* UNKNOWN COMMAND */
+
+else{
+
+terminalOutput.innerHTML += `<div>command not found</div>`;
+
+}
+
+}
+
+/* ===============================
+ARROW UP → COMMAND HISTORY
+================================ */
+
+if(e.key === "ArrowUp"){
+
+if(historyIndex > 0){
+historyIndex--;
+terminalInput.value = history[historyIndex];
+}
+
+}
+
+/* ===============================
+ARROW DOWN → COMMAND HISTORY
+================================ */
+
+if(e.key === "ArrowDown"){
+
+if(historyIndex < history.length - 1){
+historyIndex++;
+terminalInput.value = history[historyIndex];
+}
+else{
+historyIndex = history.length;
+terminalInput.value = "";
+}
+
+}
+
+/* ===============================
+TAB → AUTOCOMPLETE
+================================ */
+
+if(e.key === "Tab"){
+
+e.preventDefault();
+
+let current = terminalInput.value.toLowerCase().trim();
+
+if(current === "") return;
+
+let match = commandList.find(cmd => cmd.startsWith(current));
+
+if(match){
+terminalInput.value = match;
+}
+
+}
+
+});
+
+}
+
+/* ===============================
+AUTO FOCUS TERMINAL WHEN CLICKED
+================================ */
+
+document.querySelector(".terminal-window")?.addEventListener("click", () => {
+    terminalInput.focus();
+});
