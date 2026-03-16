@@ -107,9 +107,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-padding {
-    padding: 6rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 2.5rem 2rem 5rem 2rem;
 }
 
 .section-padding-top {
