@@ -346,10 +346,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .name {
-    font-size: 3.5rem; /* Reduced size to be professional and balanced */
-    line-height: 1.1;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.2;
     margin-bottom: 1rem;
-    white-space: nowrap; /* Forces the name to strictly stay on one line */
 }
 
 .subtitle-container {
@@ -1310,4 +1309,63 @@ min-width:0;
         flex-direction: column;
         gap: 1rem;
     }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero-text {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .terminal-window {
+    width: 100%;
+  }
+
+  .terminal-body {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+
+  .terminal-header {
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .section-padding {
+    padding: 2rem 1rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .typing-text {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    text-align: center;
+  }
+
+  .subtitle-container {
+    height: auto;
+  }
 }
