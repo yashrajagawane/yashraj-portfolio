@@ -103,7 +103,7 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(255, 59, 59, 0.3);
+    text-shadow: 0 0 10px rgba(255, 59, 59, 0.2);
 }
 
 .section-padding {
@@ -167,11 +167,11 @@ h1, h2, h3, h4, h5, h6 {
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+    box-shadow: 0 2px 8px rgba(255, 59, 59, 0.2);
 }
 
 .glow-btn:hover {
-    box-shadow: 0 0 25px rgba(255, 59, 59, 0.6);
+    box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
     transform: translateY(-2px);
 }
 
@@ -1312,20 +1312,6 @@ min-width:0;
 }
 
 @media screen and (max-width: 768px) {
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .hero-text {
-    text-align: center;
-    align-items: center;
-  }
-}
-
-
-@media screen and (max-width: 768px) {
   .hero-buttons {
     display: flex;
     flex-direction: column;
@@ -1346,26 +1332,5 @@ min-width:0;
 
   .terminal-header {
     padding: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-
-  .section-padding {
-    padding: 2rem 1rem;
-  }
-
-  .description {
-    font-size: 1rem;
-    padding: 0 10px;
-  }
-
-  .typing-text {
-    font-size: clamp(1rem, 4vw, 1.5rem);
-    text-align: center;
-  }
-
-  .subtitle-container {
-    height: auto;
   }
 }

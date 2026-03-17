@@ -435,3 +435,4 @@ AUTO FOCUS TERMINAL WHEN CLICKED
 document.querySelector(".terminal-window")?.addEventListener("click", () => {
     terminalInput.focus();
 });
+
