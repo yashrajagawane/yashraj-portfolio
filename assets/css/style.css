@@ -848,24 +848,44 @@ min-width:0;
    FEATURED PROJECTS SECTION (UPDATED)
 ========================== */
 
-/* Main Grid Layout */
+/* ==========================
+   FEATURED PROJECTS SECTION (HORIZONTAL CAROUSEL)
+========================== */
+
+/* Main Flex Layout for Horizontal Scrolling */
 .projects-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 cards per row */
-    gap: 2rem;
-    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem; /* Reduced gap for smaller cards */
+    margin-top: 1rem; /* Adjusted to balance the new top padding */
+    padding-top: 1rem; /* ADDED: Gives room for the card to hover up without getting cut off */
+    padding-bottom: 2.5rem; /* Breathing room for the custom scrollbar */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory; /* Premium native-app snapping effect */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide the scrollbar completely but keep scrolling functionality */
+.projects-grid-modern::-webkit-scrollbar {
+    display: none;
 }
 
 /* Modern Project Card Styling */
 .modern-project-card {
+    flex: 0 0 320px; /* Reduced width for smaller, balanced cards */
+    scroll-snap-align: start; /* Snaps exactly to the left edge of each card */
+    scroll-snap-stop: always; /* Crucial: Forces scrolling to stop one card at a time */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1.5rem;
+    padding: 1.2rem; /* Reduced padding for smaller card */
     position: relative;
     overflow: hidden;
-    height: 100%;
-    /* Reuses .glass-card variables from existing theme */
+    height: auto; 
+    align-self: stretch; /* Ensures all cards stretch to match the tallest one */
     background: var(--card-bg, rgba(255, 255, 255, 0.03));
     border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -873,7 +893,7 @@ min-width:0;
 
 .modern-project-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 59, 59, 0.4);
+    border-color: rgba(255, 59, 59, 0.4); /* Red border hover */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 59, 59, 0.15);
 }
 
@@ -897,10 +917,10 @@ min-width:0;
 /* Project Image Container */
 .project-image-container {
     width: 100%;
-    height: 200px;
+    height: 170px; /* Reduced image height to balance the card */
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.5); /* Placeholder background */
 }
@@ -918,18 +938,18 @@ min-width:0;
 
 /* Project Header (Title & Description) */
 .project-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .project-header h3 {
-    font-size: 1.35rem;
-    color: var(--accent-primary, #ff3b3b); /* Made red to match screenshot layout */
-    margin-bottom: 0.8rem;
+    font-size: 1.2rem; /* Scaled down heading */
+    color: var(--accent-primary, #ff3b3b); /* Red Theme */
+    margin-bottom: 0.6rem;
     line-height: 1.3;
 }
 
 .project-header p {
-    font-size: 0.95rem;
+    font-size: 0.9rem; /* Scaled down paragraph */
     color: var(--text-secondary, #b0b0b0);
     line-height: 1.5;
 }
@@ -938,21 +958,25 @@ min-width:0;
 .project-tech-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.8rem;
+    gap: 0.4rem; /* Tighter gap for smaller tags */
+    margin-bottom: 1.5rem;
     flex-grow: 1; /* Pushes the buttons to the bottom */
+    align-items: flex-start; /* ADDED: Prevents tags from stretching unevenly */
 }
 
 .tech-tag {
-    background: rgba(255, 59, 59, 0.05);
-    border: 1px solid rgba(255, 59, 59, 0.15);
+    background: rgba(255, 59, 59, 0.05); /* Red tint */
+    border: 1px solid rgba(255, 59, 59, 0.15); /* Red border */
     color: #d1d5db;
-    font-size: 0.8rem;
-    padding: 4px 10px;
+    font-size: 0.75rem; /* Scaled down tag text */
+    padding: 0 14px; /* Increased side padding for perfectly balanced pill shape */
     border-radius: 20px;
-    display: flex;
+    display: inline-flex; /* Keeps icon and text tightly grouped */
     align-items: center;
-    gap: 0.4rem;
+    gap: 6px; /* Slightly increased gap between icon and text */
+    height: 28px; /* Forces absolute uniformity across all tags */
+    box-sizing: border-box; /* Prevents borders from changing the size */
+    white-space: nowrap; /* Prevents text from awkwardly wrapping */
     transition: all 0.3s ease;
 }
 
@@ -962,14 +986,20 @@ min-width:0;
 }
 
 .tech-tag i {
-    color: var(--accent-secondary, #ff7a7a);
+    color: var(--accent-secondary, #ff7a7a); /* Lighter Red */
 }
 
 /* Project Action Links */
 .project-links {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem; /* Scaled down gap between buttons */
     margin-top: auto; /* Ensures buttons align at the bottom */
+}
+
+/* Shrink standard buttons slightly for these cards */
+.project-links .small-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
 }
 
 .disabled-btn {
@@ -986,17 +1016,57 @@ min-width:0;
 }
 
 /* ==========================
-   RESPONSIVE DESIGN (PROJECTS)
+   HORIZONTAL SCROLL HINT (NEW)
+========================== */
+.scroll-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    color: var(--text-secondary, #b0b0b0);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    opacity: 0.7;
+    animation: pulseFade 2.5s infinite ease-in-out;
+}
+
+.scroll-hint i {
+    color: var(--accent-primary, #ff3b3b);
+    font-size: 1rem;
+    animation: slideRight 1.5s infinite ease-in-out;
+}
+
+/* Animations for the hint */
+@keyframes slideRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(8px); }
+}
+
+@keyframes pulseFade {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* ==========================
+   RESPONSIVE DESIGN (HORIZONTAL PROJECTS)
 ========================== */
 @media screen and (max-width: 1200px) {
-    .projects-grid-modern {
-        grid-template-columns: repeat(2, 1fr); /* Tablet: 2 cards per row */
+    .modern-project-card {
+        flex: 0 0 300px; /* Slightly smaller width for tablets */
     }
 }
 
 @media screen and (max-width: 768px) {
+    .modern-project-card {
+        flex: 0 0 85vw; /* Almost full screen width for mobile */
+        scroll-snap-align: center; /* Centers the card on mobile screen for better UX */
+    }
+    
     .projects-grid-modern {
-        grid-template-columns: 1fr; /* Mobile: 1 card per row */
+        gap: 1rem; /* Smaller gap on mobile */
     }
 }
 
