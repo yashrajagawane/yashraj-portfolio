@@ -5,20 +5,24 @@ const navbar = document.querySelector('.navbar');
 // Custom Mouse Follower Glow
 document.addEventListener('mousemove', (e) => {
     // Update cursor glow position
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
+    if (cursorGlow) {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+    }
 });
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(17, 17, 17, 0.9)';
-        navbar.style.border = '1px solid rgba(220, 38, 38, 0.25)';
-        navbar.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(17, 17, 17, 0.7)';
-        navbar.style.border = '1px solid rgba(220, 38, 38, 0.15)';
-        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(17, 17, 17, 0.9)';
+            navbar.style.border = '1px solid rgba(220, 38, 38, 0.25)';
+            navbar.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.1)';
+        } else {
+            navbar.style.background = 'rgba(17, 17, 17, 0.7)';
+            navbar.style.border = '1px solid rgba(220, 38, 38, 0.15)';
+            navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
+        }
     }
 });
 
@@ -28,7 +32,6 @@ const navLinks = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
     let current = '';
-    
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
@@ -45,26 +48,27 @@ window.addEventListener('scroll', () => {
     });
 });
 
-
 // Contact Form submission
 const contactForm = document.getElementById('contact-form');
-if(contactForm) {
+
+if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const btn = contactForm.querySelector('button');
         const originalText = btn.innerHTML;
-        
+
         // 1. Show "Sending..." with spinner
         btn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
-        
+
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
         // 2. Prepare Data for Web3Forms
         const formData = new FormData();
-        // 🛑 IMPORTANT: Replace 'YOUR_ACCESS_KEY_HERE' with the key you got in your email!
-        formData.append("access_key", "2180806b-af16-48e9-a989-ac0f8834ca0a"); 
+
+        // IMPORTANT: Replace 'YOUR_ACCESS_KEY_HERE' with the key you got in your email!
+        formData.append("access_key", "2180806b-af16-48e9-a989-ac0f8834ca0a");
         formData.append("name", name);
         formData.append("email", email);
         formData.append("message", message);
@@ -77,13 +81,12 @@ if(contactForm) {
         .then(async (response) => {
             if (response.ok) {
                 // Success Animation
-                btn.innerHTML = '<span>Message Sent ✔</span>';
-                btn.style.background = '#10b981'; 
+                btn.innerHTML = '<span>Message Sent ✓ </span>';
+                btn.style.background = '#10b981';
                 btn.style.borderColor = '#10b981';
                 btn.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.4)';
-                
                 contactForm.reset();
-                
+
                 // Reset button after 3 seconds
                 setTimeout(() => {
                     btn.innerHTML = originalText;
@@ -95,8 +98,9 @@ if(contactForm) {
                 // If something goes wrong
                 btn.innerHTML = '<span>Error! Try Again</span> <i class="fas fa-times"></i>';
                 btn.style.background = '#ff3b3b';
-                setTimeout(() => { 
-                    btn.innerHTML = originalText; 
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
                     btn.style.background = '';
                 }, 3000);
             }
@@ -105,8 +109,9 @@ if(contactForm) {
             console.error("Error:", error);
             btn.innerHTML = '<span>Error! Try Again</span> <i class="fas fa-times"></i>';
             btn.style.background = '#ff3b3b';
-            setTimeout(() => { 
-                btn.innerHTML = originalText; 
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
                 btn.style.background = '';
             }, 3000);
         });
@@ -114,61 +119,55 @@ if(contactForm) {
 }
 
 // Global Check before initializing Typed.js
-
-// Global Check before initializing Typed.js
 if (typeof Typed !== 'undefined') {
-    // Initialize Typed.js for Subtitle (Restored looping multi-text)
+    // Initialize Typed.js for Subtitle
     new Typed('.typing-text', {
         strings: [
             'Software Developer',
-            'AI Developer',
+            'Al Developer',
             'Machine Learning Enthusiast'
         ],
         typeSpeed: 50,
         backSpeed: 30,
-        loop: true,           // Restored loop
-        backDelay: 2000,      // Added delay before deleting
+        loop: true,
+        backDelay: 2000,
         showCursor: true,
         cursorChar: '|'
     });
 
-    // Initialize Typed.js for Terminal (Restored terminal boot sequence)
+    // Initialize Typed.js for Terminal
     new Typed('.typed-terminal', {
-    strings: [
-    'initializing portfolio system...<br>^500> loading AI projects...<br>^500> loading machine learning modules...<br>^500> <span style="color:#ff3b3b">developer profile ready.</span>'
-    ],
-    typeSpeed: 30,
-    showCursor: true,
-    cursorChar: '█',
-    loop: false,
+        strings: [
+            'initializing portfolio system...<br>^500> loading Al projects...<br>^500> loading machine learning modules...<br>^500> <span style="color:#ff3b3b">developer profile ready.</span>'
+        ],
+        typeSpeed: 30,
+        showCursor: true,
+        cursorChar: '_',
+        loop: false,
+        onComplete: function() {
+            setTimeout(() => {
+                const inputLine = document.querySelector(".terminal-input-line");
+                const inputBox = document.getElementById("terminal-input");
 
-    onComplete: function(){
-
-    setTimeout(() => {
-
-    const inputLine = document.querySelector(".terminal-input-line");
-    const inputBox = document.getElementById("terminal-input");
-
-    if(inputLine){
-    inputLine.style.display = "flex";
-    }
-
-    if(inputBox){
-    inputBox.focus();
-    }
-
-    }, 300);
-
-    }
+                if (inputLine) {
+                    inputLine.style.display = "flex";
+                }
+                if (inputBox) {
+                    // THE FIX: Adding preventScroll: true prevents the page from jumping 
+                    // back to the top when the animation finishes
+                    inputBox.focus({ preventScroll: true });
+                }
+            }, 300);
+        }
     });
 }
 
 // Initialize TagCloud (3D Skill Sphere)
 if (typeof TagCloud !== 'undefined') {
     const SkillSphereText = [
-        'Python', 'Machine Learning', 'AI', 'JavaScript', 
+        'Python', 'Machine Learning', 'AI', 'JavaScript',
         'Flask', 'Data Science', 'C++', 'Java',
-        'OpenCV', 'React', 'HTML', 'CSS', 
+        'OpenCV', 'React', 'HTML', 'CSS',
         'SQL', 'Git', 'Deep Learning', 'NLP'
     ];
 
@@ -183,6 +182,7 @@ if (typeof TagCloud !== 'undefined') {
 
 // Initialize ScrollReveal
 if (typeof ScrollReveal !== 'undefined') {
+    // Fixed syntax formatting here for proper initializaton
     ScrollReveal({
         reset: false,
         distance: '60px',
@@ -210,12 +210,11 @@ if (typeof tsParticles !== 'undefined') {
                 }
             },
             color: {
-                // Updated to match the new Soft Red theme
-                value: ["#ef4444", "#f87171", "#ffffff"] 
+                value: ["#ef4444", "#f87171", "#ffffff"]
             },
             links: {
                 enable: true,
-                color: "#ef4444", // Updated link color
+                color: "#ef4444",
                 distance: 150,
                 opacity: 0.15,
                 width: 1
@@ -267,172 +266,100 @@ if (typeof tsParticles !== 'undefined') {
     });
 }
 
-/* ===============================
-ADVANCED TERMINAL COMMAND SYSTEM
-(Command history + autocomplete)
-================================ */
-
+/* === ADVANCED TERMINAL COMMAND SYSTEM === */
 const terminalInput = document.getElementById("terminal-input");
 const terminalOutput = document.getElementById("terminal-output");
 
 if (terminalInput) {
+    const commandList = [
+        "github", "instagram", "linkedin", "whatsapp",
+        "about", "skills", "projects", "experience", "contact", "help"
+    ];
 
-const commandList = [
-"github",
-"instagram",
-"linkedin",
-"whatsapp",
-"about",
-"skills",
-"projects",
-"experience",
-"contact",
-"help"
-];
+    let history = [];
+    let historyIndex = -1;
 
-let history = [];
-let historyIndex = -1;
+    terminalInput.addEventListener("keydown", function(e) {
+        /* ENTER → RUN COMMAND */
+        if (e.key === "Enter") {
+            let command = terminalInput.value.trim().toLowerCase();
+            if (command === "") return;
 
-terminalInput.addEventListener("keydown", function(e){
+            history.push(command);
+            historyIndex = history.length;
+            terminalInput.value = "";
 
-/* ===============================
-ENTER → RUN COMMAND
-================================ */
+            /* SOCIAL LINKS */
+            if (command === "github") {
+                window.open("https://github.com/yashrajagawane", "_blank");
+            } else if (command === "instagram") {
+                window.open("https://instagram.com", "_blank");
+            } else if (command === "linkedin") {
+                window.open("https://linkedin.com/in/yashrajagawane", "_blank");
+            } else if (command === "whatsapp") {
+                window.open("https://wa.me/", "_blank");
+            }
+            /* SECTION NAVIGATION */
+            else if (command === "about") {
+                document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+            } else if (command === "skills") {
+                document.getElementById("skills").scrollIntoView({ behavior: "smooth" });
+            } else if (command === "projects") {
+                document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
+            } else if (command === "experience") {
+                document.getElementById("experience").scrollIntoView({ behavior: "smooth" });
+            } else if (command === "contact") {
+                document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+            }
+            /* HELP COMMAND */
+            else if (command === "help") {
+                terminalOutput.innerHTML += `
+                    <div>Available commands:</div>
+                    <div>- github, instagram, linkedin, whatsapp</div>
+                    <div>- about, skills, projects, experience, contact</div>`;
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+            /* UNKNOWN COMMAND */
+            else {
+                terminalOutput.innerHTML += '<div>command not found</div>';
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        }
 
-if(e.key === "Enter"){
+        /* ARROW UP COMMAND HISTORY */
+        if (e.key === "ArrowUp") {
+            if (historyIndex > 0) {
+                historyIndex--;
+                terminalInput.value = history[historyIndex];
+            }
+        }
 
-let command = terminalInput.value.trim().toLowerCase();
+        /* ARROW DOWN COMMAND HISTORY */
+        if (e.key === "ArrowDown") {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                terminalInput.value = history[historyIndex];
+            } else {
+                historyIndex = history.length;
+                terminalInput.value = "";
+            }
+        }
 
-if(command === "") return;
-
-history.push(command);
-historyIndex = history.length;
-
-terminalInput.value = "";
-
-/* SOCIAL LINKS */
-
-if(command === "github"){
-window.open("https://github.com/yashrajagawane","_blank");
+        /* TAB AUTOCOMPLETE */
+        if (e.key === "Tab") {
+            e.preventDefault();
+            let current = terminalInput.value.toLowerCase().trim();
+            if (current === "") return;
+            let match = commandList.find(cmd => cmd.startsWith(current));
+            if (match) {
+                terminalInput.value = match;
+            }
+        }
+    });
 }
 
-else if(command === "instagram"){
-window.open("https://instagram.com","_blank");
-}
-
-else if(command === "linkedin"){
-window.open("https://linkedin.com/in/yashrajagawane","_blank");
-}
-
-else if(command === "whatsapp"){
-window.open("https://wa.me/","_blank");
-}
-
-/* SECTION NAVIGATION */
-
-else if(command === "about"){
-document.getElementById("about").scrollIntoView({behavior:"smooth"});
-}
-
-else if(command === "skills"){
-document.getElementById("skills").scrollIntoView({behavior:"smooth"});
-}
-
-else if(command === "projects"){
-document.getElementById("projects").scrollIntoView({behavior:"smooth"});
-}
-
-else if(command === "experience"){
-document.getElementById("experience").scrollIntoView({behavior:"smooth"});
-}
-
-else if(command === "contact"){
-document.getElementById("contact").scrollIntoView({behavior:"smooth"});
-}
-
-/* HELP COMMAND */
-
-else if(command === "help"){
-
-terminalOutput.innerHTML += `
-<div>Available commands:</div>
-<div>- github, instagram, linkedin, whatsapp</div>
-<div>- about, skills, projects, experience, contact</div>
-`;
-
-terminalOutput.scrollTop = terminalOutput.scrollHeight;
-
-}
-
-/* UNKNOWN COMMAND */
-
-else{
-
-terminalOutput.innerHTML += `<div>command not found</div>`;
-
-}
-
-}
-
-/* ===============================
-ARROW UP → COMMAND HISTORY
-================================ */
-
-if(e.key === "ArrowUp"){
-
-if(historyIndex > 0){
-historyIndex--;
-terminalInput.value = history[historyIndex];
-}
-
-}
-
-/* ===============================
-ARROW DOWN → COMMAND HISTORY
-================================ */
-
-if(e.key === "ArrowDown"){
-
-if(historyIndex < history.length - 1){
-historyIndex++;
-terminalInput.value = history[historyIndex];
-}
-else{
-historyIndex = history.length;
-terminalInput.value = "";
-}
-
-}
-
-/* ===============================
-TAB → AUTOCOMPLETE
-================================ */
-
-if(e.key === "Tab"){
-
-e.preventDefault();
-
-let current = terminalInput.value.toLowerCase().trim();
-
-if(current === "") return;
-
-let match = commandList.find(cmd => cmd.startsWith(current));
-
-if(match){
-terminalInput.value = match;
-}
-
-}
-
-});
-
-}
-
-/* ===============================
-AUTO FOCUS TERMINAL WHEN CLICKED
-================================ */
-
+/* AUTO FOCUS TERMINAL WHEN CLICKED */
 document.querySelector(".terminal-window")?.addEventListener("click", () => {
-    terminalInput.focus();
+    // Also adding preventScroll here to ensure smooth usage
+    terminalInput.focus({ preventScroll: true });
 });
-
