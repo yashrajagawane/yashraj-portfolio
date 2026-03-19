@@ -1,106 +1,104 @@
-# ⚡ Yashraj Agawane — AI Developer Portfolio
+# ⚡ YASHRAJ AGAWANE — AI DEVELOPER
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=26&duration=3000&color=FF3B3B&center=true&vCenter=true&width=600&lines=AI+Developer;Machine+Learning+Enthusiast;Building+Intelligent+Systems;Crafting+Premium+Web+Experiences" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=26&duration=3000&color=00FF9C&center=true&vCenter=true&width=700&lines=AI+Developer;Machine+Learning+Engineer;Building+Intelligent+Systems;Crafting+Next+Gen+Web+Experiences" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Live-Portfolio-success?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Deployed-Vercel-black?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/UI-Premium%20Glassmorphism-purple?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/API-Web3Forms-orange?style=for-the-badge"/>
+  <img src="https://komarev.com/ghpvc/?username=yashrajagawane&label=Profile+Views&color=00ff9c&style=flat" />
 </p>
 
 ---
 
-## 🌐 Live Experience
+## 🧠 SYSTEM STATUS
+
+```diff
++ Portfolio Status      : ONLINE
++ UI Mode              : PREMIUM GLASS + NEON
++ Performance          : OPTIMIZED
++ Deployment           : VERCEL
++ Contact System       : WEB3FORMS ACTIVE
+```
+
+---
+
+## 🌐 LIVE ACCESS
 
 <p align="center">
   <a href="https://yashrajagawane.dev">
-    <img src="https://img.shields.io/badge/🚀%20Visit%20Portfolio-Click%20Here-ff3b3b?style=for-the-badge&logo=vercel"/>
+    <img src="https://img.shields.io/badge/🚀%20ENTER%20PORTFOLIO-00FF9C?style=for-the-badge&logo=vercel&logoColor=black"/>
   </a>
 </p>
 
 ---
 
-## 🧠 About This Project
-
-This is not just a portfolio — it's a **fully immersive AI-themed digital experience**.
-
-Designed to:
-
-* Impress recruiters instantly ⚡
-* Showcase projects with clarity 🧩
-* Deliver a premium UI feel 🎨
-* Represent a modern AI developer identity 🤖
-
----
-
-## ✨ Key Highlights
-
-### 🎯 Experience & Design
-
-* 🧊 Glassmorphism UI with neon glow effects
-* 🎬 Smooth Awwwards-style animations
-* 🌌 Interactive particle background
-* 💻 AI terminal simulation interface
-* ⌨️ Typing animations for dynamic storytelling
-
----
-
-### 🧩 Advanced Components
-
-* 🧠 3D Skill Sphere (TagCloud)
-* 📊 Animated skill bars
-* 🎴 Interactive project cards
-* 🎯 Scroll-triggered animations
-
----
-
-### 📬 Smart Contact System
-
-* 📡 Web3Forms API integration
-* ⚡ Instant message delivery
-* ✅ Real-time success/error UI
-* 🔒 Secure & lightweight
-
----
-
-### ⚡ Performance First
-
-* 🚀 Deployed on Vercel
-* 📊 Analytics enabled
-* ⚡ Speed Insights enabled
-* 🌍 Custom domain configured
-
----
-
-## 🛠️ Tech Stack
+## 🎬 PREVIEW (REAL EXPERIENCE)
 
 <p align="center">
-
-<img src="https://skillicons.dev/icons?i=html,css,js,react,python,git,github,vscode" />
-
+  <img src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" width="900"/>
 </p>
 
----
-
-## 📁 Project Structure
-
-```
-📦 portfolio
- ┣ 📂 assets
- ┃ ┣ 📂 css
- ┃ ┣ 📂 js
- ┣ 📜 index.html
- ┣ 📜 style.css
- ┣ 📜 script.js
- ┗ 📜 README.md
-```
+> ⚠️ Replace this GIF with your own screen recording for maximum impact
 
 ---
 
-## ⚙️ Setup
+## ⚡ CORE FEATURES
+
+```bash
+✔ Advanced Glassmorphism UI
+✔ AI Terminal Interface
+✔ 3D Skill Sphere
+✔ Animated Project Cards
+✔ Particle Background
+✔ Scroll-based Animations
+✔ Responsive Design
+✔ Web3Forms Contact System
+```
+
+---
+
+## 🧩 TECH STACK
+
+```yaml
+Frontend:
+  - HTML5
+  - CSS3
+  - JavaScript
+
+Animations:
+  - ScrollReveal
+  - Typed.js
+  - tsParticles
+
+UI:
+  - Glassmorphism
+  - Neon Effects
+  - 3D TagCloud
+
+Backend:
+  - Web3Forms API
+
+Deployment:
+  - Vercel
+```
+
+---
+
+## 📂 PROJECT STRUCTURE
+
+```bash
+portfolio/
+│── assets/
+│   ├── css/
+│   ├── js/
+│── index.html
+│── style.css
+│── script.js
+```
+
+---
+
+## ⚙️ SETUP
 
 ```bash
 git clone https://github.com/yashrajagawane/your-repo-name.git
@@ -110,88 +108,66 @@ open index.html
 
 ---
 
-## 🔐 Contact Form Setup (Web3Forms)
+## 🔐 CONTACT FORM CONFIG
 
-```javascript
+```js
 formData.append("access_key", "YOUR_ACCESS_KEY");
 ```
 
-👉 Get your key from: https://web3forms.com
-
 ---
 
-## 🚀 Deployment
+## 🚀 DEPLOYMENT PIPELINE
 
 ```bash
 git push origin main
-```
-
-👉 Import into Vercel → Deploy → Add domain → Done ⚡
-
----
-
-## 🎬 Preview
-
-<p align="center">
-  <img src="https://via.placeholder.com/900x450.png?text=AI+Portfolio+Preview" />
-</p>
-
----
-
-## 🧠 Future Enhancements
-
-* 🤖 AI chatbot integration
-* 🌗 Dark/Light mode toggle
-* 📊 Advanced analytics dashboard
-* 🧩 Dynamic project CMS
-* 🌐 Multi-language support
-
----
-
-## 🤝 Contribution
-
-Want to improve this project?
-
-```bash
-Fork → Clone → Improve → PR 🚀
+# Vercel auto deploy 🚀
 ```
 
 ---
 
-## 📬 Connect With Me
+## 🧠 FUTURE UPGRADES
+
+```diff
++ AI Chatbot Integration
++ Admin Dashboard
++ CMS for Projects
++ Theme Switcher
++ Performance Optimizer
+```
+
+---
+
+## 📡 CONNECT
 
 <p align="center">
 
 <a href="https://github.com/yashrajagawane">
-  <img src="https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github"/>
+<img src="https://img.shields.io/badge/GitHub-00FF9C?style=for-the-badge&logo=github&logoColor=black"/>
 </a>
 
 <a href="https://linkedin.com/in/yashrajagawane">
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin"/>
+<img src="https://img.shields.io/badge/LinkedIn-00FF9C?style=for-the-badge&logo=linkedin&logoColor=black"/>
 </a>
 
 <a href="mailto:agawaneyash865@gmail.com">
-  <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail"/>
+<img src="https://img.shields.io/badge/Email-00FF9C?style=for-the-badge&logo=gmail&logoColor=black"/>
 </a>
 
 </p>
 
 ---
 
-## ⭐ Support
+## ⭐ SUPPORT
 
+```bash
 If you like this project:
-
-* ⭐ Star this repo
-* 🔁 Share it
-* 💬 Give feedback
+→ Star ⭐ the repo
+→ Share 🚀
+→ Connect 🤝
+```
 
 ---
 
 <p align="center">
-  ⚡ <b>Crafted with passion & precision by Yashraj Agawane</b> ⚡
-</p>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=ff3b3b&height=120&section=footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=00ff9c&height=120&section=footer"/>
 </p>
