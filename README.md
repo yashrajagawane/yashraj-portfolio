@@ -1,7 +1,7 @@
 # ⚡ Yashraj Agawane — Portfolio
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=26&duration=3000&color=FF3B3B&center=true&vCenter=true&width=600&lines=AI+Developer;Machine+Learning+Enthusiast;Building+Intelligent+Systems;Crafting+Premium+Web+Experiences" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=26&duration=3000&color=00FF9C&center=true&vCenter=true&width=600&lines=AI+Developer;Machine+Learning+Enthusiast;Building+Intelligent+Systems;Crafting+Premium+Web+Experiences" />
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 
 <p align="center">
   <a href="https://yashrajagawane.dev">
-    <img src="https://img.shields.io/badge/🚀%20Visit%20Portfolio-Click%20Here-ff3b3b?style=for-the-badge&logo=vercel"/>
+    <img src="https://img.shields.io/badge/🚀%20Visit%20Portfolio-Click%20Here-00FF9C?style=for-the-badge&logo=vercel&logoColor=black"/>
   </a>
 </p>
 
@@ -33,6 +33,20 @@ Designed to:
 * Showcase projects with clarity 🧩
 * Deliver a premium UI feel 🎨
 * Represent a modern AI developer identity 🤖
+
+---
+
+## 🚀 Why This Portfolio Stands Out
+
+This portfolio is built with a **next-generation UI approach**, combining:
+
+* ⚡ **Performance-first architecture** (fast loading, optimized assets)
+* 🎯 **Recruiter-focused design** (clean sections, clear hierarchy)
+* 🧠 **AI-inspired experience** (terminal UI, intelligent visuals)
+* 🎨 **Modern design system** (glassmorphism + neon accents)
+* 📱 **Fully responsive layout** across all devices
+
+It is not just a showcase — it is a **personal brand representation system**.
 
 ---
 
@@ -193,5 +207,5 @@ If you like this project:
 </p>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=ff3b3b&height=120&section=footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=00ff9c&height=120&section=footer"/>
 </p>
