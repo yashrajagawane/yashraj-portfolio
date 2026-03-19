@@ -1,4 +1,4 @@
-# ⚡ Yashraj Agawane — AI Developer Portfolio
+# ⚡ Yashraj Agawane — Portfolio
 
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=26&duration=3000&color=FF3B3B&center=true&vCenter=true&width=600&lines=AI+Developer;Machine+Learning+Enthusiast;Building+Intelligent+Systems;Crafting+Premium+Web+Experiences" />
