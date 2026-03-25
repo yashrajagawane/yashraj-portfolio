@@ -198,8 +198,6 @@ If you like this project:
 
 * ⭐ Star this repo
 * 🔁 Share it
-* 💬 Give feedback
-
 ---
 
 <p align="center">
