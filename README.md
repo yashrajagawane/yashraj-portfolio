@@ -8,9 +8,7 @@
   <img src="https://img.shields.io/badge/UI-Premium%20Glassmorphism-purple?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/API-Web3Forms-orange?style=for-the-badge"/>
 </p>
-
 ---
-
 ## 🌐 Live Experience
 
 <p align="center">
