@@ -1,6 +1,9 @@
 # ⚡ Yashraj Agawane - Portfolio
+
 <p align="center">
+
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=26&duration=3000&color=00FF9C&center=true&vCenter=true&width=600&lines=AI+Developer;Machine+Learning+Enthusiast;Building+Intelligent+Systems;Crafting+Premium+Web+Experiences" />
+  
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Live-Portfolio-success?style=for-the-badge"/>
@@ -8,7 +11,9 @@
   <img src="https://img.shields.io/badge/UI-Premium%20Glassmorphism-purple?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/API-Web3Forms-orange?style=for-the-badge"/>
 </p>
+
 ---
+
 ## 🌐 Live Experience
 
 <p align="center">
