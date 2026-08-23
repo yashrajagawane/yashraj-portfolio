@@ -21,8 +21,8 @@ AI providers selected:
 
 ### Phase 1 — Prepare project structure
 
-- Status: `Not started`
-- Notes: Add the backend/serverless route, profile data, environment template, and shared response format.
+- Status: `Complete`
+- Notes: Backend/serverless skeleton, environment template, shared response format, and local health checks are complete on `codex/chatbot-phase-1`.
 
 ### Phase 2 — Build profile knowledge base
 
@@ -91,6 +91,19 @@ AI providers selected:
 - [ ] `.env` files ignored by Git.
 - [ ] No real keys committed.
 - [ ] Production environment variables configured only after local verification.
+
+## Phase 1 verification
+
+- [x] Added `.env.example` with Gemini Flash and Groq configuration names only.
+- [x] Added `.gitignore` for secrets, dependencies, deployment output, and logs.
+- [x] Added `api/health.js` serverless health endpoint.
+- [x] Added `api/chat.js` stable chat route contract.
+- [x] Added shared normalized response helpers in `server/chat/response.js`.
+- [x] Added server structure documentation.
+- [x] JavaScript syntax checks pass for all new server files.
+- [x] Health endpoint returns `200` with `ok: true`.
+- [x] Chat endpoint returns a controlled `503` until provider integrations are added.
+- [x] No provider API key is present in tracked files.
 
 ## Phase 0 decisions and findings
 
@@ -193,3 +206,10 @@ AI providers selected:
 - Approved English, professional/friendly/concise behavior.
 - Approved internship and collaboration inquiries.
 - Confirmed that unverified links and unavailable resume content remain excluded.
+
+### Phase 1 completion
+
+- Created the dedicated `codex/chatbot-phase-1` branch.
+- Added the serverless backend skeleton and stable chat API boundary.
+- Added environment and secret-handling templates.
+- Verified endpoint behavior and JavaScript syntax locally.
