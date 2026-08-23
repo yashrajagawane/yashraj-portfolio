@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-08-24",
+  "identity": {
+    "name": "Yashraj Agawane",
+    "assistantName": "Yashraj's Portfolio Assistant",
+    "title": "AI Developer and Machine Learning Enthusiast",
+    "location": "Maharashtra, India",
+    "languages": ["English"]
+  },
+  "summary": "Yashraj Agawane is a third-year B.Tech Information Technology student passionate about Artificial Intelligence, Machine Learning, Software Development, computer vision, and AI-powered applications.",
+  "bio": [
+    "Yashraj is passionate about building intelligent systems, AI-powered applications, and modern web solutions that solve real-world problems.",
+    "He enjoys building intelligent systems, computer vision applications, and AI-powered tools that solve real-world problems.",
+    "His goal is to become an AI engineer and software developer capable of building impactful technology and scalable systems."
+  ],
+  "education": [
+    {
+      "degree": "B.Tech Information Technology",
+      "status": "3rd Year"
+    }
+  ],
+  "interests": [
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Software Development",
+    "Computer Vision",
+    "Data Analysis"
+  ],
+  "skills": [
+    "HTML",
+    "JavaScript",
+    "Python",
+    "CSS",
+    "Machine Learning",
+    "Data Analysis",
+    "C++",
+    "Computer Vision",
+    "Java",
+    "C",
+    "Git",
+    "NLP",
+    "GitHub",
+    "VS Code",
+    "MySQL",
+    "Flask",
+    "Power BI",
+    "Data Science",
+    "OpenCV",
+    "React",
+    "SQL",
+    "Deep Learning"
+  ],
+  "projects": [
+    {
+      "name": "HireMind AI – Resume Intelligence Platform",
+      "summary": "A full-stack AI-powered career intelligence platform that helps users analyze resumes, improve ATS scores, identify skill gaps, discover relevant job opportunities, and prepare for interviews using advanced AI models and machine learning.",
+      "technologies": ["Next.js", "React", "FastAPI", "Gemini AI", "Groq AI", "ATS Analysis", "Career Analytics"],
+      "github": "https://github.com/yashrajagawane/hiremind-ai",
+      "liveDemo": "https://hiremind-ai-seven.vercel.app",
+      "highlights": ["Resume analysis", "ATS improvement", "Skill-gap identification", "Career analytics", "Interview preparation"]
+    },
+    {
+      "name": "StyleHub – Digital Boutique Showcase & Inventory Platform",
+      "summary": "A production-ready digital showroom and inventory back-office for a physical clothing boutique. Customers can browse and shortlist products, then call, message, or visit the store, while the owner manages the catalogue, CMS, and analytics from an admin dashboard.",
+      "technologies": ["React 19", "FastAPI", "MongoDB", "Tailwind CSS", "TanStack Query", "Admin Dashboard"],
+      "github": "https://github.com/yashrajagawane/stylehub",
+      "liveDemo": "https://style-hub-tau-ruby.vercel.app/",
+      "highlights": ["Digital showroom", "Inventory management", "Catalogue CMS", "Admin dashboard", "Analytics"]
+    },
+    {
+      "name": "Driver Drowsiness Detection System",
+      "summary": "A real-time AI system that detects driver fatigue using Eye Aspect Ratio and computer vision through a live browser camera feed.",
+      "technologies": ["Python", "OpenCV", "Dlib", "Flask", "Computer Vision"],
+      "github": "https://github.com/yashrajagawane/driver-drowsiness-detection-system",
+      "liveDemo": "https://smart-driver-monitor.onrender.com",
+      "highlights": ["Real-time fatigue detection", "Eye Aspect Ratio", "Browser camera feed"]
+    },
+    {
+      "name": "Ledger — Personal Expense Tracker",
+      "summary": "A personal expense tracking web app with authentication, transaction CRUD, budget tracking, reports, and interactive charts built with a server-rendered Flask architecture.",
+      "technologies": ["Python", "Flask", "SQLite", "SQLAlchemy", "Chart.js", "CSRF Auth", "Jinja2"],
+      "github": "https://github.com/yashrajagawane/expense-tracker-flask",
+      "liveDemo": "https://expense-tracker-flask-zvxu.onrender.com/",
+      "highlights": ["Authentication", "Transaction CRUD", "Budget tracking", "Reports", "Interactive charts"]
+    },
+    {
+      "name": "AI Fitness Coach Chatbot",
+      "summary": "A full-stack AI fitness and nutrition assistant that generates personalized workout and diet plans using Gemini AI with a modern chat interface.",
+      "technologies": ["Next.js", "React", "Gemini AI", "JavaScript", "Vercel"],
+      "github": "https://github.com/yashrajagawane/fitness-nutrition-chatbot",
+      "liveDemo": "https://fitness-nutrition-chatbot.vercel.app",
+      "highlights": ["Personalized workout plans", "Personalized diet plans", "AI chat interface"]
+    },
+    {
+      "name": "Sai Vandan CRM – Enterprise Real Estate ERP",
+      "summary": "An enterprise-ready real-estate CRM and operational ERP covering enquiry, inventory, bookings, collections, HR/payroll, and procurement, with seven role-based dashboards, JWT-secured APIs, and complete audit trails.",
+      "technologies": ["Java 21", "Spring Boot", "React", "TypeScript", "PostgreSQL", "JWT", "RBAC", "Docker", "Real Estate ERP"],
+      "github": "https://github.com/yashrajagawane/sai-vandan-crm",
+      "liveDemo": "https://sai-vandan-web.onrender.com",
+      "highlights": ["Seven role-based dashboards", "Property lifecycle operations", "JWT-secured APIs", "Audit trails"]
+    },
+    {
+      "name": "Tic Tac Toe – Smart AI Opponent",
+      "summary": "A modern take on the classic game with Player vs Player and Player vs Computer modes. The AI opponent evaluates the board strategically by blocking threats, taking winning moves, and prioritizing strong positions, with score tracking and match history.",
+      "technologies": ["React", "JavaScript", "Tailwind CSS", "AI Logic", "Score Tracking"],
+      "github": "https://github.com/yashrajagawane/tic-tac-toe",
+      "liveDemo": "https://tic-tac-toe-two-ashen-45.vercel.app",
+      "highlights": ["Player versus computer", "Strategic AI opponent", "Score tracking", "Match history"]
+    },
+    {
+      "name": "AI Travel Planner – Smart Travel Planning Platform",
+      "summary": "A full-stack travel planning platform with secure authentication, live weather forecasting through OpenWeatherMap, and a premium glassmorphism dashboard built on a modular Flask backend designed for future AI-powered itinerary generation.",
+      "technologies": ["Flask", "SQLite", "OpenWeatherMap API", "Authentication", "Glassmorphism UI", "Render"],
+      "github": "https://github.com/yashrajagawane/ai-travel-planner",
+      "liveDemo": "https://ai-travel-planner-fgka.onrender.com",
+      "highlights": ["Secure authentication", "Live weather forecasting", "Glassmorphism dashboard", "Modular Flask backend"]
+    },
+    {
+      "name": "Phonebook Directory using Binary Search Tree",
+      "summary": "A console-based phonebook management system implemented using a Binary Search Tree for efficient contact storage, search, editing, deletion, and sorted display.",
+      "technologies": ["C++", "Data Structures", "Binary Search Tree", "File Handling"],
+      "github": "https://github.com/yashrajagawane/phonebook-directory-bst",
+      "liveDemo": null,
+      "highlights": ["Contact storage", "Search", "Editing", "Deletion", "Sorted display"]
+    },
+    {
+      "name": "Multiple Disease Prediction System",
+      "summary": "An AI-powered healthcare web application that predicts diseases such as diabetes, heart disease, and Parkinson's using machine learning models.",
+      "technologies": ["Python", "Machine Learning", "Scikit-learn", "Streamlit", "Pandas"],
+      "github": "https://github.com/yashrajagawane/multiple-disease-prediction-system",
+      "liveDemo": "https://medical-risk-analyzer-yash.streamlit.app",
+      "highlights": ["Diabetes prediction", "Heart disease prediction", "Parkinson's prediction", "Machine learning models"]
+    }
+  ],
+  "experience": {
+    "status": "Building experience",
+    "statement": "I may have no experience today, but with time, dedication, and persistence, I will build stories worth telling and achievements worth sharing."
+  },
+  "availability": {
+    "internships": true,
+    "collaborations": true,
+    "approvedWording": "Yashraj is open to conversations about internships, collaborations, and interesting technology discussions."
+  },
+  "contact": {
+    "email": "agawaneyash865@gmail.com",
+    "github": "https://github.com/yashrajagawane",
+    "linkedin": "https://www.linkedin.com/in/yashraj-agawane/",
+    "resume": null,
+    "instagram": null,
+    "whatsapp": null,
+    "telegram": null,
+    "location": "Maharashtra, India"
+  },
+  "assistantRules": [
+    "Use only the information in this profile and the current user message.",
+    "Never invent projects, employment, awards, metrics, dates, or achievements.",
+    "Do not claim that a resume, Instagram, WhatsApp, or Telegram contact option is available.",
+    "Identify yourself as Yashraj's portfolio assistant, not as Yashraj himself.",
+    "If information is missing, say that it is not available in the portfolio.",
+    "Keep answers concise, friendly, professional, and useful to recruiters."
+  ]
+}
