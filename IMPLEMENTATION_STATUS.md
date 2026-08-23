@@ -4,7 +4,7 @@ Last updated: 2026-08-24
 
 ## Current status
 
-Phase 0 is in progress. The portfolio has been audited as the initial source of truth; a few contact and resume details still need confirmation before the knowledge base is finalized.
+Phase 0 is complete. The live portfolio has been audited and the chatbot scope is finalized using only verified portfolio facts and links.
 
 AI providers selected:
 
@@ -16,8 +16,8 @@ AI providers selected:
 
 ### Phase 0 — Confirm scope and content
 
-- Status: `Needs review`
-- Notes: Portfolio facts and chatbot boundaries are documented below. Resume and placeholder social links need confirmation.
+- Status: `Complete`
+- Notes: Use verified portfolio facts, GitHub, LinkedIn, and email. Omit the missing resume and placeholder social destinations.
 
 ### Phase 1 — Prepare project structure
 
@@ -142,12 +142,19 @@ AI providers selected:
 
 ### Phase 0 review items
 
-- [ ] Confirm the valid resume URL or resume file.
-- [ ] Confirm real Instagram, WhatsApp, and Telegram links, or remove those options.
-- [ ] Confirm internship/collaboration availability wording.
+- [x] Confirm the valid resume URL or resume file: none is currently available, so the chatbot will not promise a resume download.
+- [x] Confirm real Instagram, WhatsApp, and Telegram links, or remove those options: omit the current placeholder destinations.
+- [x] Confirm internship/collaboration availability wording: treat the portfolio's collaboration and internship invitation as approved scope.
 - [x] Confirm initial chatbot language: English.
 - [x] Confirm initial chatbot tone: professional, friendly, concise.
 - [x] Confirm Gemini Flash as primary provider and Groq as fallback provider.
+
+### Phase 0 completion decision
+
+- The chatbot may describe Yashraj as open to internships and collaborations because the live contact section explicitly invites both.
+- The chatbot must provide email, GitHub, and LinkedIn as verified contact actions.
+- The chatbot must not provide a resume action until a real resume URL or file is added.
+- The chatbot must not provide Instagram, WhatsApp, or Telegram actions until real profile links are added.
 
 ## Verification checklist
 
@@ -179,3 +186,10 @@ AI providers selected:
 - Defined the first-release tone, language, and answer boundaries.
 - Identified the missing resume destination and placeholder social links.
 - Identified title and `AI` wording corrections for the knowledge-base preparation phase.
+
+### Phase 0 completion
+
+- Finalized the chatbot scope using the live portfolio as the source of truth.
+- Approved English, professional/friendly/concise behavior.
+- Approved internship and collaboration inquiries.
+- Confirmed that unverified links and unavailable resume content remain excluded.
