@@ -31,8 +31,8 @@ AI providers selected:
 
 ### Phase 3 — Gemini Flash integration
 
-- Status: `Not started`
-- Notes: Add the server-side Gemini adapter, streaming, timeout, and error normalization.
+- Status: `Needs review`
+- Notes: Gemini adapter and grounded chat route are implemented on `codex/chatbot-phase-3`. Live verification is pending local Gemini credentials; no PR will be merged until it passes.
 
 ### Phase 4 — Groq integration
 
@@ -115,6 +115,19 @@ AI providers selected:
 - [x] Added assistant grounding and non-invention rules.
 - [x] Corrected the visible `Al` wording to `AI` in the chatbot knowledge data.
 - [x] JSON validation passed with 10 projects and 22 skills.
+
+## Phase 3 verification
+
+- [x] Added normalized provider error handling.
+- [x] Added grounded system-instruction construction from `profile.json`.
+- [x] Added server-side Gemini `generateContent` adapter.
+- [x] Connected `POST /api/chat` to Gemini with input validation.
+- [x] Added a 1,000-character message limit.
+- [x] JavaScript syntax checks pass for all Phase 3 files.
+- [x] Mocked successful Gemini response test passes.
+- [x] Missing-configuration error test passes without exposing secrets.
+- [ ] Real Gemini request passes with configured local credentials.
+- [ ] Production Gemini environment variables are configured.
 
 ## Phase 0 decisions and findings
 
@@ -231,3 +244,10 @@ AI providers selected:
 - Built the structured profile knowledge base from the live portfolio.
 - Added verified links and explicit unavailable-contact values.
 - Validated the JSON structure and required profile fields locally.
+
+### Phase 3 progress
+
+- Created the dedicated `codex/chatbot-phase-3` branch.
+- Implemented Gemini provider integration without committing credentials.
+- Connected the grounded chat API route to Gemini.
+- Paused merge until a real provider request is verified.
