@@ -94,6 +94,15 @@ AI providers selected:
 
 ## Phase 0 decisions and findings
 
+### Live-site verification
+
+- Verified the deployed portfolio at `https://yashrajagawane.dev/`.
+- The deployed content matches the repository's current profile, skills, projects, experience, and contact sections.
+- The deployed site confirms that the resume link is still `#resume` and does not resolve to a resume resource.
+- The deployed site confirms that Instagram, WhatsApp, and Telegram links are generic or incomplete destinations.
+- The chatbot knowledge source will include only verified links and facts from the live portfolio.
+- The chatbot will omit unavailable resume and unverified social actions until valid destinations are supplied.
+
 ### Approved source of truth
 
 - Use the current portfolio content as the initial approved knowledge source.
