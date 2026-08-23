@@ -26,8 +26,8 @@ AI providers selected:
 
 ### Phase 2 — Build profile knowledge base
 
-- Status: `Not started`
-- Notes: Create the structured portfolio source of truth and static FAQ fallback.
+- Status: `Complete`
+- Notes: Structured profile source of truth created and validated from the verified live portfolio on `codex/chatbot-phase-2`.
 
 ### Phase 3 — Gemini Flash integration
 
@@ -104,6 +104,17 @@ AI providers selected:
 - [x] Health endpoint returns `200` with `ok: true`.
 - [x] Chat endpoint returns a controlled `503` until provider integrations are added.
 - [x] No provider API key is present in tracked files.
+
+## Phase 2 verification
+
+- [x] Created `server/data/profile.json` as the chatbot source of truth.
+- [x] Included identity, biography, education, interests, skills, projects, experience, availability, and contact data.
+- [x] Included all 10 projects listed in the live portfolio.
+- [x] Included verified GitHub, live-demo, LinkedIn, and email links.
+- [x] Represented the missing resume and placeholder social links as unavailable values.
+- [x] Added assistant grounding and non-invention rules.
+- [x] Corrected the visible `Al` wording to `AI` in the chatbot knowledge data.
+- [x] JSON validation passed with 10 projects and 22 skills.
 
 ## Phase 0 decisions and findings
 
@@ -213,3 +224,10 @@ AI providers selected:
 - Added the serverless backend skeleton and stable chat API boundary.
 - Added environment and secret-handling templates.
 - Verified endpoint behavior and JavaScript syntax locally.
+
+### Phase 2 completion
+
+- Created the dedicated `codex/chatbot-phase-2` branch.
+- Built the structured profile knowledge base from the live portfolio.
+- Added verified links and explicit unavailable-contact values.
+- Validated the JSON structure and required profile fields locally.
