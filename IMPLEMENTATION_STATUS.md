@@ -4,7 +4,7 @@ Last updated: 2026-08-24
 
 ## Current status
 
-Planning complete. Implementation has not started.
+Phase 0 is in progress. The portfolio has been audited as the initial source of truth; a few contact and resume details still need confirmation before the knowledge base is finalized.
 
 AI providers selected:
 
@@ -16,8 +16,8 @@ AI providers selected:
 
 ### Phase 0 — Confirm scope and content
 
-- Status: `Not started`
-- Notes: Confirm tone, languages, resume, social links, and availability wording.
+- Status: `Needs review`
+- Notes: Portfolio facts and chatbot boundaries are documented below. Resume and placeholder social links need confirmation.
 
 ### Phase 1 — Prepare project structure
 
@@ -92,6 +92,54 @@ AI providers selected:
 - [ ] No real keys committed.
 - [ ] Production environment variables configured only after local verification.
 
+## Phase 0 decisions and findings
+
+### Approved source of truth
+
+- Use the current portfolio content as the initial approved knowledge source.
+- Use only information visible in `index.html`, the project links, and the finalized profile data file.
+- Do not invent experience, awards, employment history, metrics, or achievements.
+
+### Assistant tone
+
+- Professional, friendly, concise, and recruiter-focused.
+- Identify itself as Yashraj's portfolio assistant, not as Yashraj himself.
+- Answer in English for the first release because the current portfolio content is written in English.
+- Refuse or redirect questions that are unrelated to the portfolio when the answer is not available in the approved data.
+
+### Approved chatbot topics
+
+- Yashraj's profile and biography.
+- B.Tech Information Technology education and current third-year status shown in the portfolio.
+- Technical skills and interests.
+- Featured projects, technologies, GitHub links, and live demos.
+- The experience section's current statement that Yashraj is building experience.
+- Collaboration and internship inquiries.
+- Approved contact and social links.
+
+### Contact findings
+
+- Approved contact email: `agawaneyash865@gmail.com`.
+- Approved GitHub profile: `https://github.com/yashrajagawane`.
+- Approved LinkedIn profile: `https://www.linkedin.com/in/yashraj-agawane/`.
+- Instagram, WhatsApp, and Telegram URLs currently contain placeholders or generic destinations and must not be presented as verified contact options.
+- The resume button currently points to `#resume`, but no resume section or file is present. The chatbot must not promise a resume download until a valid URL or file is supplied.
+
+### Wording cleanup required before knowledge-base finalization
+
+- Correct the surname typo in the page title and meta description: `Agawnae` → `Agawane`.
+- Correct visible `Al` typos to `AI` in project and typing text.
+- Confirm whether the portfolio should state that Yashraj is currently open to internships, collaborations, or both.
+
+### Phase 0 review items
+
+- [ ] Confirm the valid resume URL or resume file.
+- [ ] Confirm real Instagram, WhatsApp, and Telegram links, or remove those options.
+- [ ] Confirm internship/collaboration availability wording.
+- [x] Confirm initial chatbot language: English.
+- [x] Confirm initial chatbot tone: professional, friendly, concise.
+- [x] Confirm Gemini Flash as primary provider and Groq as fallback provider.
+
 ## Verification checklist
 
 - [ ] Gemini answers a known portfolio question.
@@ -115,3 +163,10 @@ AI providers selected:
 - Selected Groq as the independent fallback provider.
 - Defined a local static fallback for full provider failure.
 - Created this implementation status tracker.
+
+### Phase 0 audit
+
+- Audited the portfolio as the chatbot's initial approved source of truth.
+- Defined the first-release tone, language, and answer boundaries.
+- Identified the missing resume destination and placeholder social links.
+- Identified title and `AI` wording corrections for the knowledge-base preparation phase.
