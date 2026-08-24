@@ -1,11 +1,10 @@
 const { createErrorResponse, createSuccessResponse } = require('../server/chat/response');
 const { buildSystemInstruction } = require('../server/chat/prompt');
-const { generateWithGemini } = require('../server/providers/gemini');
+const { generateChatResponse } = require('../server/router');
 const profile = require('../server/data/profile.json');
 
 /**
- * Chat route contract. Gemini and Groq adapters are added in Phases 3 and 4.
- * Keeping this route in place now gives the frontend a stable API boundary.
+ * Chat route with Gemini -> Groq -> static portfolio failover.
  */
 module.exports = function chatHandler(request, response) {
     if (request.method !== 'POST') {
@@ -31,22 +30,17 @@ module.exports = function chatHandler(request, response) {
         );
     }
 
-    return generateWithGemini({
+    return generateChatResponse({
         message,
-        systemInstruction: buildSystemInstruction(profile)
+        systemInstruction: buildSystemInstruction(profile),
+        profile
     })
         .then(result => response.status(200).json(createSuccessResponse(result.answer, {
             provider: result.provider,
             model: result.model,
-            fallbackUsed: false
+            fallbackUsed: result.fallbackUsed
         })))
-        .catch(error => {
-            const status = error.code === 'MISSING_CONFIGURATION' ? 503 : 502;
-            return response.status(status).json(
-                createErrorResponse(
-                    'The portfolio assistant is temporarily unavailable. Please use the contact links instead.',
-                    error.code || 'CHATBOT_ERROR'
-                )
-            );
-        });
+        .catch(() => response.status(500).json(
+            createErrorResponse('The portfolio assistant is temporarily unavailable. Please use the contact links instead.', 'CHATBOT_ERROR')
+        ));
 };

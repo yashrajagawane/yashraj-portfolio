@@ -41,8 +41,8 @@ AI providers selected:
 
 ### Phase 5 — Provider router and failover
 
-- Status: `Not started`
-- Notes: Implement Gemini → retry → Groq → retry → static fallback.
+- Status: `In progress`
+- Notes: Gemini → retry → Groq → retry → static fallback routing is implemented on `codex/chatbot-phase-5`.
 
 ### Phase 6 — Validation, rate limiting, and safety
 
@@ -139,6 +139,19 @@ AI providers selected:
 - [x] Mocked successful Groq response test passes.
 - [x] Missing-configuration error test passes without exposing secrets.
 - [ ] Real Groq request passes with configured credentials.
+
+## Phase 5 verification
+
+- [x] Added bounded retry handling with a maximum of two attempts per provider.
+- [x] Retries only transient provider errors marked retryable.
+- [x] Routes Gemini first and Groq second.
+- [x] Returns the static portfolio fallback when both providers fail or are unconfigured.
+- [x] Keeps provider failure details out of the public response.
+- [x] Gemini-first mocked routing test passes.
+- [x] Groq failover mocked routing test passes.
+- [x] Static fallback mocked routing test passes.
+- [x] JavaScript syntax and whitespace checks pass.
+- [ ] Real deployed Gemini → Groq failover is verified.
 
 ## Phase 0 decisions and findings
 
@@ -268,3 +281,10 @@ AI providers selected:
 - Created the dedicated `codex/chatbot-phase-4` branch.
 - Implemented the independent Groq adapter using the OpenAI-compatible API.
 - Kept provider routing for the next phase so this adapter can be tested independently.
+
+### Phase 5 progress
+
+- Created the dedicated `codex/chatbot-phase-5` branch.
+- Added bounded retry handling for transient provider failures.
+- Added Gemini-first, Groq-second routing with a grounded local static fallback.
+- Connected `POST /api/chat` to the provider router.
