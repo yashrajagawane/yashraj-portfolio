@@ -1,12 +1,29 @@
 const { createErrorResponse, createSuccessResponse } = require('../server/chat/response');
 const { buildSystemInstruction } = require('../server/chat/prompt');
 const { generateChatResponse } = require('../server/router');
+const { applyCorsHeaders, isOriginAllowed } = require('../server/security/cors');
+const { chatRateLimiter, getClientKey, getRateLimitConfig } = require('../server/security/rate-limit');
 const profile = require('../server/data/profile.json');
 
 /**
  * Chat route with Gemini -> Groq -> static portfolio failover.
  */
 module.exports = function chatHandler(request, response) {
+    applyCorsHeaders(request, response);
+
+    if (request.method === 'OPTIONS') {
+        if (!isOriginAllowed(request)) {
+            return response.status(403).json(createErrorResponse('This origin is not allowed.', 'ORIGIN_NOT_ALLOWED'));
+        }
+        return response.status(204).end();
+    }
+
+    if (!isOriginAllowed(request)) {
+        return response.status(403).json(
+            createErrorResponse('This origin is not allowed.', 'ORIGIN_NOT_ALLOWED')
+        );
+    }
+
     if (request.method !== 'POST') {
         response.setHeader('Allow', 'POST');
         return response.status(405).json(
@@ -27,6 +44,17 @@ module.exports = function chatHandler(request, response) {
     if (message.length > 1000) {
         return response.status(413).json(
             createErrorResponse('Please keep your message under 1,000 characters.', 'MESSAGE_TOO_LONG')
+        );
+    }
+
+    const rateLimit = chatRateLimiter.check(getClientKey(request), getRateLimitConfig());
+    response.setHeader('X-RateLimit-Limit', getRateLimitConfig().maxRequests);
+    response.setHeader('X-RateLimit-Remaining', rateLimit.remaining);
+
+    if (!rateLimit.allowed) {
+        response.setHeader('Retry-After', rateLimit.retryAfterSeconds);
+        return response.status(429).json(
+            createErrorResponse('You have reached the chat request limit. Please try again later.', 'RATE_LIMITED')
         );
     }
 

@@ -41,13 +41,13 @@ AI providers selected:
 
 ### Phase 5 — Provider router and failover
 
-- Status: `In progress`
+- Status: `Needs review`
 - Notes: Gemini → retry → Groq → retry → static fallback routing is implemented on `codex/chatbot-phase-5`.
 
 ### Phase 6 — Validation, rate limiting, and safety
 
-- Status: `Not started`
-- Notes: Protect the public endpoint and prevent misuse.
+- Status: `In progress`
+- Notes: Origin validation, CORS headers, per-client rate limiting, and safe request handling are implemented on `codex/chatbot-phase-6`.
 
 ### Phase 7 — Chatbot widget
 
@@ -152,6 +152,18 @@ AI providers selected:
 - [x] Static fallback mocked routing test passes.
 - [x] JavaScript syntax and whitespace checks pass.
 - [ ] Real deployed Gemini → Groq failover is verified.
+
+## Phase 6 verification
+
+- [x] Preserves empty and oversized message validation.
+- [x] Rejects disallowed browser origins with a safe `403` response.
+- [x] Handles CORS preflight requests without invoking providers.
+- [x] Adds configurable per-client rate limiting with `429` and `Retry-After`.
+- [x] Returns safe public error messages without provider details or secrets.
+- [x] Adds rate-limit response headers.
+- [x] JavaScript syntax and whitespace checks pass.
+- [x] Mocked origin and rate-limit tests pass.
+- [ ] Distributed rate limiting is configured for multi-instance production scaling.
 
 ## Phase 0 decisions and findings
 
@@ -288,3 +300,10 @@ AI providers selected:
 - Added bounded retry handling for transient provider failures.
 - Added Gemini-first, Groq-second routing with a grounded local static fallback.
 - Connected `POST /api/chat` to the provider router.
+
+### Phase 6 progress
+
+- Created the dedicated `codex/chatbot-phase-6` branch.
+- Added exact allowed-origin checks and CORS preflight handling.
+- Added configurable in-memory per-client request limiting suitable for the initial serverless release.
+- Added safe `429` responses and rate-limit headers.
