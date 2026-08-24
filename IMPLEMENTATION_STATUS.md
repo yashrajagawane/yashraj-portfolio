@@ -1,6 +1,6 @@
 # Chatbot Implementation Status
 
-Last updated: 2026-08-24
+Last updated: 2026-08-25
 
 ## Current status
 
@@ -31,13 +31,13 @@ AI providers selected:
 
 ### Phase 3 — Gemini Flash integration
 
-- Status: `Not started`
-- Notes: Add the server-side Gemini adapter, streaming, timeout, and error normalization.
+- Status: `Needs review`
+- Notes: Gemini adapter and grounded chat route are implemented. Vercel variable names and scopes are configured; a real deployed request remains to be verified.
 
 ### Phase 4 — Groq integration
 
-- Status: `Not started`
-- Notes: Add the independent server-side Groq adapter with a matching response format.
+- Status: `Needs review`
+- Notes: Independent server-side Groq adapter is implemented on `codex/chatbot-phase-4`; provider routing remains in Phase 5. A real Groq request remains to be verified.
 
 ### Phase 5 — Provider router and failover
 
@@ -115,6 +115,30 @@ AI providers selected:
 - [x] Added assistant grounding and non-invention rules.
 - [x] Corrected the visible `Al` wording to `AI` in the chatbot knowledge data.
 - [x] JSON validation passed with 10 projects and 22 skills.
+
+## Phase 3 verification
+
+- [x] Added normalized provider error handling.
+- [x] Added grounded system-instruction construction from `profile.json`.
+- [x] Added server-side Gemini `generateContent` adapter.
+- [x] Connected `POST /api/chat` to Gemini with input validation.
+- [x] Added a 1,000-character message limit.
+- [x] JavaScript syntax checks pass for all Phase 3 files.
+- [x] Mocked successful Gemini response test passes.
+- [x] Missing-configuration error test passes without exposing secrets.
+- [x] Gemini variable names and Production/Preview scopes were configured in Vercel.
+- [ ] Real Gemini request is verified in the deployed environment.
+
+## Phase 4 verification
+
+- [x] Added independent Groq chat-completions adapter.
+- [x] Reads `GROQ_API_KEY` and `GROQ_MODEL` only on the server.
+- [x] Reuses the grounded system instruction and normalized provider result shape.
+- [x] Handles missing configuration, network failure, timeout, rate limiting, provider errors, invalid responses, and empty responses.
+- [x] Adds a 12-second request timeout.
+- [x] Mocked successful Groq response test passes.
+- [x] Missing-configuration error test passes without exposing secrets.
+- [ ] Real Groq request passes with configured credentials.
 
 ## Phase 0 decisions and findings
 
@@ -231,3 +255,16 @@ AI providers selected:
 - Built the structured profile knowledge base from the live portfolio.
 - Added verified links and explicit unavailable-contact values.
 - Validated the JSON structure and required profile fields locally.
+
+### Phase 3 progress
+
+- Created the dedicated `codex/chatbot-phase-3` branch.
+- Implemented Gemini provider integration without committing credentials.
+- Connected the grounded chat API route to Gemini.
+- Paused merge until a real provider request is verified.
+
+### Phase 4 progress
+
+- Created the dedicated `codex/chatbot-phase-4` branch.
+- Implemented the independent Groq adapter using the OpenAI-compatible API.
+- Kept provider routing for the next phase so this adapter can be tested independently.
