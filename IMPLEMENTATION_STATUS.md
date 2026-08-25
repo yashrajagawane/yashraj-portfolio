@@ -61,8 +61,8 @@ AI providers selected:
 
 ### Phase 9 — Testing
 
-- Status: `Not started`
-- Notes: Test normal questions, unknown questions, abuse cases, and provider failures.
+- Status: `Needs review`
+- Notes: Added repeatable Node test coverage for common questions, provider failover, streaming, fallback, validation, CORS, rate limiting, and widget accessibility on `codex/chatbot-phase-9`.
 
 ### Phase 10 — Deployment
 
@@ -179,6 +179,20 @@ AI providers selected:
 - [x] Mocked static streaming fallback test passes.
 - [x] JavaScript syntax and whitespace checks pass.
 - [ ] Real production provider stream is verified.
+
+## Phase 9 verification
+
+- [x] Added repeatable `npm test` command using Node's built-in test runner.
+- [x] Tests cover Gemini success and transient-error retry behavior.
+- [x] Tests cover Groq failover and both-provider static fallback.
+- [x] Tests cover Gemini and Groq SSE token normalization.
+- [x] Tests cover streamed static fallback behavior.
+- [x] Tests cover empty and oversized messages.
+- [x] Tests cover unknown-question boundaries without invented facts.
+- [x] Tests cover allowed/disallowed origins and rate-limit rollover.
+- [x] Tests cover widget accessibility and streaming/cancellation wiring.
+- [x] All 10 tests pass locally.
+- [ ] Browser matrix and real-provider failure tests are verified in production.
 
 ## Phase 0 decisions and findings
 
@@ -338,3 +352,9 @@ AI providers selected:
 - Added progressive token rendering in the widget with stream error handling.
 - Added streamed static fallback output when both providers are unavailable.
 - Added client-side cancellation when the assistant panel is closed.
+
+### Phase 9 progress
+
+- Created the dedicated `codex/chatbot-phase-9` branch.
+- Added a built-in Node test runner command with no external test dependency.
+- Covered normal portfolio questions, unknown/provider failures, SSE chunks, static fallback, input limits, CORS, rate limiting, and widget controls.

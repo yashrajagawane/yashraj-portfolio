@@ -1,0 +1,7 @@
+{
+  "name": "yashraj-portfolio-chatbot",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/chatbot.test.js"
+  }
+}
