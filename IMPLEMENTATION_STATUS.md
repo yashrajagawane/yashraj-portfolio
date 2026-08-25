@@ -46,7 +46,7 @@ AI providers selected:
 
 ### Phase 6 — Validation, rate limiting, and safety
 
-- Status: `In progress`
+- Status: `Needs review`
 - Notes: Origin validation, CORS headers, per-client rate limiting, and safe request handling are implemented on `codex/chatbot-phase-6`.
 
 ### Phase 7 — Chatbot widget
@@ -66,8 +66,8 @@ AI providers selected:
 
 ### Phase 10 — Deployment
 
-- Status: `Not started`
-- Notes: Configure production secrets, origin, alerts, and deployment verification.
+- Status: `In progress`
+- Notes: Added deployment-safe health reporting, selected model defaults, and the Vercel production verification checklist on `codex/chatbot-phase-10`.
 
 ### Phase 11 — Monitoring and maintenance
 
@@ -193,6 +193,17 @@ AI providers selected:
 - [x] Tests cover widget accessibility and streaming/cancellation wiring.
 - [x] All 10 tests pass locally.
 - [ ] Browser matrix and real-provider failure tests are verified in production.
+
+## Phase 10 verification
+
+- [x] Health endpoint reports safe provider configuration state without secrets.
+- [x] Health endpoint reports static fallback and streaming availability.
+- [x] `.env.example` contains the selected models and blank key fields.
+- [x] Added Vercel environment-variable and deployment verification documentation.
+- [x] Added rollback guidance using the previous ready Vercel deployment.
+- [x] `npm test` passes locally.
+- [x] Production health endpoint and chatbot smoke test verified after deployment.
+- [ ] Production failover and Preview static-fallback tests are completed with provider credentials intentionally disabled.
 
 ## Phase 0 decisions and findings
 
@@ -358,3 +369,10 @@ AI providers selected:
 - Created the dedicated `codex/chatbot-phase-9` branch.
 - Added a built-in Node test runner command with no external test dependency.
 - Covered normal portfolio questions, unknown/provider failures, SSE chunks, static fallback, input limits, CORS, rate limiting, and widget controls.
+
+### Phase 10 progress
+
+- Created the dedicated `codex/chatbot-phase-10` branch.
+- Updated `/api/health` to report safe provider configuration state and streaming availability.
+- Added selected Gemini and Groq model defaults to `.env.example` without keys.
+- Added `DEPLOYMENT_CHECKLIST.md` for Vercel configuration, verification, and rollback.

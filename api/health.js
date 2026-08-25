@@ -1,6 +1,6 @@
 /**
- * Minimal serverless health endpoint for the chatbot backend.
- * Provider integrations are intentionally added in later phases.
+ * Public deployment health endpoint. It reports configuration state only;
+ * it never returns provider keys or other secret values.
  */
 module.exports = function healthHandler(request, response) {
     if (request.method !== 'GET') {
@@ -11,10 +11,19 @@ module.exports = function healthHandler(request, response) {
         });
     }
 
+    const geminiConfigured = Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_MODEL);
+    const groqConfigured = Boolean(process.env.GROQ_API_KEY && process.env.GROQ_MODEL);
+
     return response.status(200).json({
         ok: true,
         service: 'portfolio-chatbot-api',
-        phase: 1,
-        providersConfigured: false
+        phase: 10,
+        providersConfigured: geminiConfigured || groqConfigured,
+        providers: {
+            geminiConfigured,
+            groqConfigured,
+            staticFallbackAvailable: true,
+            streamingAvailable: true
+        }
     });
 };
