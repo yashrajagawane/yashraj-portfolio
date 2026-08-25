@@ -856,6 +856,51 @@
         </div>
     </footer>
 
+    <!-- Portfolio assistant -->
+    <section class="chatbot" aria-label="Yashraj's portfolio assistant">
+        <button class="chatbot-launcher" type="button" aria-expanded="false" aria-controls="chatbot-panel" aria-label="Open portfolio assistant">
+            <i class="fas fa-comment-dots" aria-hidden="true"></i>
+            <span class="chatbot-launcher-label">Ask me</span>
+        </button>
+
+        <div class="chatbot-panel glass-card" id="chatbot-panel" role="dialog" aria-modal="false" aria-labelledby="chatbot-title" hidden>
+            <div class="chatbot-header">
+                <div class="chatbot-heading">
+                    <span class="chatbot-status-dot" aria-hidden="true"></span>
+                    <div>
+                        <h2 id="chatbot-title">Portfolio Assistant</h2>
+                        <p>Ask about Yashraj's work</p>
+                    </div>
+                </div>
+                <div class="chatbot-header-actions">
+                    <button class="chatbot-icon-btn chatbot-clear" type="button" aria-label="Clear conversation" title="Clear conversation">
+                        <i class="fas fa-trash-can" aria-hidden="true"></i>
+                    </button>
+                    <button class="chatbot-icon-btn chatbot-close" type="button" aria-label="Close portfolio assistant" title="Close">
+                        <i class="fas fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chatbot-messages" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
+
+            <div class="chatbot-suggestions" aria-label="Suggested questions">
+                <button type="button" data-chat-question="What projects has Yashraj built?">Projects</button>
+                <button type="button" data-chat-question="What technologies does he know?">Skills</button>
+                <button type="button" data-chat-question="How can I contact Yashraj?">Contact</button>
+            </div>
+
+            <form class="chatbot-form">
+                <label class="sr-only" for="chatbot-input">Ask the portfolio assistant</label>
+                <textarea id="chatbot-input" rows="1" maxlength="1000" placeholder="Ask a question..." autocomplete="off"></textarea>
+                <button class="chatbot-send" type="submit" aria-label="Send message" title="Send message">
+                    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                </button>
+            </form>
+            <p class="chatbot-disclaimer">Answers are based on the portfolio information.</p>
+        </div>
+    </section>
+
     <!-- External Libraries -->
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>

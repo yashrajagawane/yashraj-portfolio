@@ -51,8 +51,8 @@ AI providers selected:
 
 ### Phase 7 — Chatbot widget
 
-- Status: `Not started`
-- Notes: Add the responsive floating UI matching the portfolio design.
+- Status: `Needs review`
+- Notes: Responsive floating widget, accessible controls, suggestions, loading state, and `/api/chat` integration are implemented on `codex/chatbot-phase-7`.
 
 ### Phase 8 — Streaming responses
 
@@ -307,3 +307,10 @@ AI providers selected:
 - Added exact allowed-origin checks and CORS preflight handling.
 - Added configurable in-memory per-client request limiting suitable for the initial serverless release.
 - Added safe `429` responses and rate-limit headers.
+
+### Phase 7 progress
+
+- Created the dedicated `codex/chatbot-phase-7` branch.
+- Added the floating assistant launcher and responsive glassmorphism panel.
+- Added keyboard-friendly input, suggestions, clear, close, loading, error, and mobile behaviors.
+- Connected the widget to the server-side `/api/chat` endpoint without exposing provider credentials.
