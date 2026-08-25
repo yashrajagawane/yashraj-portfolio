@@ -71,8 +71,8 @@ AI providers selected:
 
 ### Phase 11 — Monitoring and maintenance
 
-- Status: `Not started`
-- Notes: Track health and keep profile data current.
+- Status: `Needs review`
+- Notes: Added privacy-safe process metrics, health visibility, and a maintenance runbook on `codex/chatbot-phase-11`.
 
 ## Status values
 
@@ -206,6 +206,16 @@ AI providers selected:
 - [x] Production stream successfully served a grounded answer through the configured fallback path.
 - [ ] Gemini primary stream is independently verified in production.
 - [ ] Production failover and Preview static-fallback tests are completed with provider credentials intentionally disabled.
+
+## Phase 11 verification
+
+- [x] Added aggregate request, response, provider, fallback, error, and latency metrics.
+- [x] Metrics do not store messages, conversation history, IP addresses, keys, or generated text.
+- [x] Added no-store metrics visibility to `/api/health`.
+- [x] Added maintenance and alert runbook documentation.
+- [x] Health and metrics module syntax checks pass.
+- [x] Metric snapshot and reset tests pass.
+- [ ] Durable multi-instance monitoring is connected to an external privacy-preserving service.
 
 ## Phase 0 decisions and findings
 
@@ -378,3 +388,10 @@ AI providers selected:
 - Updated `/api/health` to report safe provider configuration state and streaming availability.
 - Added selected Gemini and Groq model defaults to `.env.example` without keys.
 - Added `DEPLOYMENT_CHECKLIST.md` for Vercel configuration, verification, and rollback.
+
+### Phase 11 progress
+
+- Created the dedicated `codex/chatbot-phase-11` branch.
+- Added aggregate process-local metrics without storing messages or visitor identifiers.
+- Added metrics to the no-store health response.
+- Added maintenance, alert, profile-update, and key-rotation guidance.

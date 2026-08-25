@@ -9,6 +9,7 @@ const { streamWithGemini } = require('../server/providers/gemini');
 const { generateChatResponse, streamChatResponse } = require('../server/router');
 const { isOriginAllowed } = require('../server/security/cors');
 const { createRateLimiter } = require('../server/security/rate-limit');
+const { createMetrics } = require('../server/monitoring/metrics');
 
 function jsonResponse(payload, status = 200) {
     return { ok: status >= 200 && status < 300, status, json: async () => payload };
@@ -190,4 +191,22 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(html, /aria-live="polite"/);
     assert.match(script, /\/api\/chat\?stream=1/);
     assert.match(script, /AbortController/);
+});
+
+test('metrics snapshot is aggregate-only and resettable', () => {
+    const metrics = createMetrics({ now: () => 1700000000000 });
+    metrics.recordRequest();
+    metrics.recordResponse({ provider: 'groq', fallbackUsed: true, latencyMs: 120 });
+    metrics.recordError('RATE_LIMITED');
+    const snapshot = metrics.snapshot();
+    assert.equal(snapshot.requests, 1);
+    assert.equal(snapshot.responses, 1);
+    assert.equal(snapshot.fallbacks, 1);
+    assert.deepEqual(snapshot.providers, { groq: 1 });
+    assert.deepEqual(snapshot.errors, { RATE_LIMITED: 1 });
+    assert.equal(snapshot.averageLatencyMs, 120);
+    assert.equal(snapshot.scope, 'process');
+    assert.equal(JSON.stringify(snapshot).includes('message'), false);
+    metrics.reset();
+    assert.equal(metrics.snapshot().requests, 0);
 });
