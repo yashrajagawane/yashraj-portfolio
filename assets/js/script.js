@@ -363,3 +363,114 @@ document.querySelector(".terminal-window")?.addEventListener("click", () => {
     // Also adding preventScroll here to ensure smooth usage
     terminalInput.focus({ preventScroll: true });
 });
+
+/* === PORTFOLIO CHATBOT WIDGET === */
+const chatbot = document.querySelector('.chatbot');
+const chatbotLauncher = document.querySelector('.chatbot-launcher');
+const chatbotPanel = document.querySelector('.chatbot-panel');
+const chatbotClose = document.querySelector('.chatbot-close');
+const chatbotClear = document.querySelector('.chatbot-clear');
+const chatbotMessages = document.querySelector('.chatbot-messages');
+const chatbotForm = document.querySelector('.chatbot-form');
+const chatbotInput = document.querySelector('#chatbot-input');
+const chatbotSend = document.querySelector('.chatbot-send');
+const chatbotSuggestions = document.querySelectorAll('[data-chat-question]');
+
+if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm && chatbotInput) {
+    const welcomeMessage = "Hi! I'm Yashraj's portfolio assistant. Ask me about his projects, skills, education, or contact details.";
+    let isChatbotBusy = false;
+
+    const addChatMessage = (text, role, temporary = false) => {
+        const message = document.createElement('div');
+        message.className = `chatbot-message chatbot-message-${role}${temporary ? ' chatbot-message-loading' : ''}`;
+        message.textContent = text;
+        chatbotMessages.appendChild(message);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        return message;
+    };
+
+    const setChatbotOpen = (open) => {
+        chatbotPanel.hidden = !open;
+        chatbotLauncher.setAttribute('aria-expanded', String(open));
+        chatbotLauncher.setAttribute('aria-label', open ? 'Close portfolio assistant' : 'Open portfolio assistant');
+        chatbot.classList.toggle('is-open', open);
+        if (open) {
+            if (!chatbotMessages.children.length) addChatMessage(welcomeMessage, 'assistant');
+            window.setTimeout(() => chatbotInput.focus({ preventScroll: true }), 50);
+        } else {
+            chatbotLauncher.focus({ preventScroll: true });
+        }
+    };
+
+    const setChatbotBusy = (busy) => {
+        isChatbotBusy = busy;
+        chatbotInput.disabled = busy;
+        chatbotSend.disabled = busy;
+        chatbotSuggestions.forEach(button => { button.disabled = busy; });
+        chatbot.classList.toggle('is-busy', busy);
+    };
+
+    const sendChatMessage = async (messageText) => {
+        const message = messageText.trim();
+        if (!message || isChatbotBusy) return;
+
+        addChatMessage(message, 'user');
+        chatbotInput.value = '';
+        chatbotInput.style.height = 'auto';
+        const loadingMessage = addChatMessage('Thinking...', 'assistant', true);
+        setChatbotBusy(true);
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            const payload = await response.json().catch(() => null);
+            loadingMessage.remove();
+            if (!response.ok || !payload?.ok) {
+                throw new Error(payload?.error?.message || 'The assistant is temporarily unavailable.');
+            }
+            addChatMessage(payload.answer, 'assistant');
+        } catch (error) {
+            loadingMessage.remove();
+            addChatMessage(error.message || 'The assistant is temporarily unavailable. Please try again.', 'error');
+        } finally {
+            setChatbotBusy(false);
+            chatbotInput.focus({ preventScroll: true });
+        }
+    };
+
+    chatbotLauncher.addEventListener('click', () => setChatbotOpen(chatbotPanel.hidden));
+    chatbotClose?.addEventListener('click', () => setChatbotOpen(false));
+    chatbotClear?.addEventListener('click', () => {
+        chatbotMessages.replaceChildren();
+        addChatMessage(welcomeMessage, 'assistant');
+        chatbotInput.focus({ preventScroll: true });
+    });
+
+    chatbotForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        sendChatMessage(chatbotInput.value);
+    });
+
+    chatbotInput.addEventListener('input', () => {
+        chatbotInput.style.height = 'auto';
+        chatbotInput.style.height = `${Math.min(chatbotInput.scrollHeight, 120)}px`;
+    });
+
+    chatbotInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            chatbotForm.requestSubmit();
+        }
+    });
+
+    chatbotSuggestions.forEach(button => {
+        button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion || ''));
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !chatbotPanel.hidden) setChatbotOpen(false);
+    });
+}
