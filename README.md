@@ -117,6 +117,14 @@ It is not just a showcase — it is a **personal brand representation system**.
 
 ## ⚙️ Setup
 
+The portfolio chatbot uses server-side Gemini and Groq providers. Copy `.env.example` to a local environment file only when testing the API locally, and never commit real keys.
+
+```bash
+npm test
+```
+
+For Vercel variables and production verification, see [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md).
+
 ```bash
 git clone https://github.com/yashrajagawane/your-repo-name.git
 cd your-repo-name
