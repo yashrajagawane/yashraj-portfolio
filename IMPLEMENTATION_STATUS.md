@@ -56,8 +56,8 @@ AI providers selected:
 
 ### Phase 8 — Streaming responses
 
-- Status: `Not started`
-- Notes: Render provider output progressively with cancellation support.
+- Status: `Needs review`
+- Notes: Gemini and Groq SSE streams, static fallback streaming, and progressive widget rendering are implemented on `codex/chatbot-phase-8`.
 
 ### Phase 9 — Testing
 
@@ -164,6 +164,21 @@ AI providers selected:
 - [x] JavaScript syntax and whitespace checks pass.
 - [x] Mocked origin and rate-limit tests pass.
 - [ ] Distributed rate limiting is configured for multi-instance production scaling.
+
+## Phase 8 verification
+
+- [x] Added SSE parsing for provider stream chunks.
+- [x] Added Gemini streaming endpoint support.
+- [x] Added Groq streaming chat-completions support.
+- [x] Preserved the existing JSON response mode.
+- [x] Added streamed static fallback output.
+- [x] Added progressive token rendering in the widget.
+- [x] Added client-side cancellation when the panel closes.
+- [x] Mocked Gemini SSE stream test passes.
+- [x] Mocked Groq SSE stream test passes.
+- [x] Mocked static streaming fallback test passes.
+- [x] JavaScript syntax and whitespace checks pass.
+- [ ] Real production provider stream is verified.
 
 ## Phase 0 decisions and findings
 
@@ -314,3 +329,12 @@ AI providers selected:
 - Added the floating assistant launcher and responsive glassmorphism panel.
 - Added keyboard-friendly input, suggestions, clear, close, loading, error, and mobile behaviors.
 - Connected the widget to the server-side `/api/chat` endpoint without exposing provider credentials.
+
+### Phase 8 progress
+
+- Created the dedicated `codex/chatbot-phase-8` branch.
+- Added Gemini and Groq Server-Sent Events provider adapters.
+- Added an SSE API mode while preserving the existing JSON mode.
+- Added progressive token rendering in the widget with stream error handling.
+- Added streamed static fallback output when both providers are unavailable.
+- Added client-side cancellation when the assistant panel is closed.

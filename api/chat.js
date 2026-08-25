@@ -1,6 +1,6 @@
 const { createErrorResponse, createSuccessResponse } = require('../server/chat/response');
 const { buildSystemInstruction } = require('../server/chat/prompt');
-const { generateChatResponse } = require('../server/router');
+const { generateChatResponse, streamChatResponse } = require('../server/router');
 const { applyCorsHeaders, isOriginAllowed } = require('../server/security/cors');
 const { chatRateLimiter, getClientKey, getRateLimitConfig } = require('../server/security/rate-limit');
 const profile = require('../server/data/profile.json');
@@ -56,6 +56,32 @@ module.exports = function chatHandler(request, response) {
         return response.status(429).json(
             createErrorResponse('You have reached the chat request limit. Please try again later.', 'RATE_LIMITED')
         );
+    }
+
+    const wantsStream = request.query?.stream === '1' || request.url?.includes('stream=1');
+    if (wantsStream) {
+        response.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+        response.setHeader('Cache-Control', 'no-cache, no-transform');
+        response.setHeader('Connection', 'keep-alive');
+        response.setHeader('X-Accel-Buffering', 'no');
+        response.flushHeaders?.();
+        const writeEvent = (event, payload) => response.write(`event: ${event}\ndata: ${JSON.stringify(payload)}\n\n`);
+
+        return streamChatResponse({
+            message,
+            systemInstruction: buildSystemInstruction(profile),
+            profile,
+            onProvider: provider => writeEvent('start', provider),
+            onToken: token => writeEvent('token', { text: token })
+        })
+            .then(result => {
+                writeEvent('done', { ok: true, provider: result.provider, model: result.model, fallbackUsed: result.fallbackUsed });
+                return response.end();
+            })
+            .catch(() => {
+                writeEvent('error', { ok: false, message: 'The portfolio assistant is temporarily unavailable.' });
+                return response.end();
+            });
     }
 
     return generateChatResponse({
