@@ -1,4 +1,5 @@
 const { ProviderError } = require('./provider-error');
+const { consumeSse } = require('./sse');
 
 const DEFAULT_TIMEOUT_MS = 12000;
 
@@ -80,4 +81,59 @@ async function generateWithGroq({
     return { answer, provider: 'groq', model };
 }
 
-module.exports = { generateWithGroq, getGroqConfig };
+async function streamWithGroq({
+    message,
+    systemInstruction,
+    env = process.env,
+    fetchImpl = fetch,
+    onToken,
+    onProvider,
+    timeoutMs = DEFAULT_TIMEOUT_MS
+}) {
+    const { apiKey, model } = getGroqConfig(env);
+    if (!apiKey || !model) {
+        throw new ProviderError('groq', 'MISSING_CONFIGURATION', 'Groq provider configuration is missing.');
+    }
+
+    let response;
+    try {
+        response = await fetchImpl('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model,
+                messages: [
+                    { role: 'system', content: systemInstruction },
+                    { role: 'user', content: message }
+                ],
+                temperature: 0.3,
+                max_tokens: 500,
+                stream: true
+            }),
+            signal: createTimeoutSignal(timeoutMs)
+        });
+    } catch (error) {
+        const code = error?.name === 'AbortError' ? 'TIMEOUT' : 'NETWORK_ERROR';
+        throw new ProviderError('groq', code, 'Groq stream request failed.', { retryable: true });
+    }
+
+    if (!response.ok) {
+        const retryable = response.status === 408 || response.status === 429 || response.status >= 500;
+        throw new ProviderError('groq', 'PROVIDER_ERROR', `Groq stream failed with status ${response.status}.`, { retryable, status: response.status });
+    }
+
+    await onProvider?.({ provider: 'groq', model });
+    let answer = '';
+    await consumeSse(response, async payload => {
+        const text = payload?.choices?.[0]?.delta?.content || '';
+        if (text) {
+            answer += text;
+            await onToken(text);
+        }
+    });
+
+    if (!answer.trim()) throw new ProviderError('groq', 'EMPTY_RESPONSE', 'Groq returned no streamed answer.');
+    return { answer: answer.trim(), provider: 'groq', model };
+}
+
+module.exports = { generateWithGroq, streamWithGroq, getGroqConfig };

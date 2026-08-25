@@ -379,6 +379,7 @@ const chatbotSuggestions = document.querySelectorAll('[data-chat-question]');
 if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm && chatbotInput) {
     const welcomeMessage = "Hi! I'm Yashraj's portfolio assistant. Ask me about his projects, skills, education, or contact details.";
     let isChatbotBusy = false;
+    let activeChatController = null;
 
     const addChatMessage = (text, role, temporary = false) => {
         const message = document.createElement('div');
@@ -419,30 +420,71 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         chatbotInput.style.height = 'auto';
         const loadingMessage = addChatMessage('Thinking...', 'assistant', true);
         setChatbotBusy(true);
+        activeChatController = new AbortController();
 
         try {
-            const response = await fetch('/api/chat', {
+            const response = await fetch('/api/chat?stream=1', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message })
+                body: JSON.stringify({ message }),
+                signal: activeChatController.signal
             });
-            const payload = await response.json().catch(() => null);
-            loadingMessage.remove();
-            if (!response.ok || !payload?.ok) {
+            if (!response.ok || !response.body) {
+                const payload = await response.json().catch(() => null);
                 throw new Error(payload?.error?.message || 'The assistant is temporarily unavailable.');
             }
-            addChatMessage(payload.answer, 'assistant');
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let streamError = '';
+            let hasStreamText = false;
+            const consumeEvent = (event) => {
+                const data = event.split('\n')
+                    .filter(line => line.startsWith('data:'))
+                    .map(line => line.slice(5).trim())
+                    .join('\n');
+                if (!data) return;
+                const payload = JSON.parse(data);
+                if (event.startsWith('event: error')) streamError = payload.message;
+                if (event.startsWith('event: token')) {
+                    if (!hasStreamText) {
+                        loadingMessage.textContent = '';
+                        hasStreamText = true;
+                    }
+                    loadingMessage.classList.remove('chatbot-message-loading');
+                    loadingMessage.textContent += payload.text || '';
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+            };
+            while (true) {
+                const { done, value } = await reader.read();
+                buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+                const events = buffer.split('\n\n');
+                buffer = events.pop() || '';
+                events.forEach(consumeEvent);
+                if (done) break;
+            }
+            if (buffer.trim()) consumeEvent(buffer);
+            if (streamError) throw new Error(streamError);
+            if (!loadingMessage.textContent.trim() || loadingMessage.textContent === 'Thinking...') throw new Error('The assistant did not return a response.');
+            loadingMessage.classList.remove('chatbot-message-loading');
         } catch (error) {
             loadingMessage.remove();
+            if (error.name === 'AbortError') return;
             addChatMessage(error.message || 'The assistant is temporarily unavailable. Please try again.', 'error');
         } finally {
+            activeChatController = null;
             setChatbotBusy(false);
             chatbotInput.focus({ preventScroll: true });
         }
     };
 
     chatbotLauncher.addEventListener('click', () => setChatbotOpen(chatbotPanel.hidden));
-    chatbotClose?.addEventListener('click', () => setChatbotOpen(false));
+    chatbotClose?.addEventListener('click', () => {
+        activeChatController?.abort();
+        setChatbotOpen(false);
+    });
     chatbotClear?.addEventListener('click', () => {
         chatbotMessages.replaceChildren();
         addChatMessage(welcomeMessage, 'assistant');
