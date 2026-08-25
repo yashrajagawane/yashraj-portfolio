@@ -66,8 +66,8 @@ AI providers selected:
 
 ### Phase 10 — Deployment
 
-- Status: `In progress`
-- Notes: Added deployment-safe health reporting, selected model defaults, and the Vercel production verification checklist on `codex/chatbot-phase-10`.
+- Status: `Needs review`
+- Notes: Deployment health and streaming are verified in production. The smoke request succeeded through Groq fallback; Gemini primary still needs an independent production success check.
 
 ### Phase 11 — Monitoring and maintenance
 
@@ -203,6 +203,8 @@ AI providers selected:
 - [x] Added rollback guidance using the previous ready Vercel deployment.
 - [x] `npm test` passes locally.
 - [x] Production health endpoint and chatbot smoke test verified after deployment.
+- [x] Production stream successfully served a grounded answer through the configured fallback path.
+- [ ] Gemini primary stream is independently verified in production.
 - [ ] Production failover and Preview static-fallback tests are completed with provider credentials intentionally disabled.
 
 ## Phase 0 decisions and findings
