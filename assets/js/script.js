@@ -490,7 +490,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         isChatbotBusy = busy;
         chatbotInput.disabled = busy;
         chatbotSend.disabled = busy;
-        chatbotSuggestions.forEach(button => { button.disabled = busy; });
+        chatbot.querySelectorAll('[data-chat-question]').forEach(button => { button.disabled = busy; });
         chatbot.classList.toggle('is-busy', busy);
     };
 
