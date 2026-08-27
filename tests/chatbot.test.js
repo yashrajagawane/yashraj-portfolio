@@ -189,8 +189,14 @@ test('widget includes accessible launcher and streaming controls', () => {
     const script = fs.readFileSync('assets/js/script.js', 'utf8');
     assert.match(html, /aria-controls="chatbot-panel"/);
     assert.match(html, /aria-live="polite"/);
+    assert.match(html, /Yashraj AI/);
+    assert.match(html, /chatbot-quick-actions/);
+    assert.match(html, /data-chat-question="What projects has Yashraj built\?"/);
+    assert.match(html, /chatbot-cta/);
     assert.match(script, /\/api\/chat\?stream=1/);
     assert.match(script, /AbortController/);
+    assert.match(script, /localStorage/);
+    assert.match(script, /renderProjectCards/);
 });
 
 test('metrics snapshot is aggregate-only and resettable', () => {
