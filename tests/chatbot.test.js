@@ -199,6 +199,7 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(script, /AbortController/);
     assert.match(script, /localStorage/);
     assert.match(script, /renderProjectCards/);
+    assert.match(script, /Here are a few projects from Yashraj/);
     assert.doesNotMatch(script, /chatbotSuggestions\.forEach/);
 });
 

@@ -501,6 +501,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         addChatMessage(message, 'user');
         chatbot.classList.add('has-conversation');
         lastQuestion = message;
+        const isProjectQuestion = /project|built|work|ai\/ml|full stack/.test(message.toLowerCase());
         chatbotInput.value = '';
         chatbotInput.style.height = 'auto';
         const loadingMessage = addChatMessage('Thinking...', 'assistant', true);
@@ -533,6 +534,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
                 const payload = JSON.parse(data);
                 if (event.startsWith('event: error')) streamError = payload.message;
                 if (event.startsWith('event: token')) {
+                    if (isProjectQuestion) return;
                     if (!hasStreamText) {
                         loadingMessage.textContent = '';
                         hasStreamText = true;
@@ -552,6 +554,10 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
             }
             if (buffer.trim()) consumeEvent(buffer);
             if (streamError) throw new Error(streamError);
+            if (isProjectQuestion) {
+                loadingMessage.textContent = 'Here are a few projects from Yashraj\'s portfolio:';
+                loadingMessage.classList.remove('chatbot-message-loading');
+            }
             if (!loadingMessage.textContent.trim() || loadingMessage.textContent === 'Thinking...') throw new Error('The assistant did not return a response.');
             loadingMessage.classList.remove('chatbot-message-loading');
             renderProjectCards(lastQuestion);
