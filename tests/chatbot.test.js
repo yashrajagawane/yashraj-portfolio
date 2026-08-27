@@ -190,6 +190,8 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(html, /aria-controls="chatbot-panel"/);
     assert.match(html, /aria-live="polite"/);
     assert.match(html, /Yashraj AI/);
+    assert.match(html, /far fa-comment/);
+    assert.match(html, /aria-modal="true"/);
     assert.match(html, /chatbot-quick-actions/);
     assert.match(html, /data-chat-question="What projects has Yashraj built\?"/);
     assert.match(html, /chatbot-cta/);
@@ -197,6 +199,7 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(script, /AbortController/);
     assert.match(script, /localStorage/);
     assert.match(script, /renderProjectCards/);
+    assert.doesNotMatch(script, /chatbotSuggestions\.forEach/);
 });
 
 test('metrics snapshot is aggregate-only and resettable', () => {
