@@ -1435,11 +1435,11 @@ min-width:0;
     justify-content: center;
     gap: 0.6rem;
     padding: 0;
-    border: 1px solid rgba(255, 122, 122, 0.7);
+    border: 0;
     border-radius: 50%;
     color: #ffffff;
-    background: var(--accent-gradient);
-    box-shadow: 0 8px 30px rgba(255, 59, 59, 0.3), 0 0 20px rgba(255, 59, 59, 0.2);
+    background: #d0785c;
+    box-shadow: 0 8px 30px rgba(208, 120, 92, 0.32), 0 0 20px rgba(208, 120, 92, 0.18);
     transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1448,7 +1448,7 @@ min-width:0;
 .chatbot-launcher:hover,
 .chatbot-launcher:focus-visible {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(255, 59, 59, 0.4), 0 0 28px rgba(255, 59, 59, 0.3);
+    box-shadow: 0 12px 35px rgba(208, 120, 92, 0.42), 0 0 28px rgba(208, 120, 92, 0.26);
 }
 
 .chatbot-launcher-label {
@@ -1479,6 +1479,14 @@ min-width:0;
 }
 
 .chatbot-panel[hidden] { display: none; }
+
+/* Keep the enlarged desktop panel inside the viewport instead of growing
+   upward past the browser chrome. Mobile remains full-screen below. */
+.chatbot.is-open .chatbot-panel {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+}
 
 @keyframes chatbotIn {
     from { opacity: 0; transform: translateY(10px) scale(0.98); }
@@ -1654,7 +1662,7 @@ min-width:0;
 @media screen and (max-width: 520px) {
     .chatbot { right: 0; bottom: 0; left: 0; }
     .chatbot-launcher { margin-left: auto; }
-    .chatbot-panel { position: fixed; inset: 0; width: 100%; height: 100dvh; min-height: 0; border-radius: 0; padding-bottom: env(safe-area-inset-bottom); }
+    .chatbot-panel, .chatbot.is-open .chatbot-panel { position: fixed; inset: 0; right: 0; bottom: 0; width: 100%; height: 100dvh; min-height: 0; border-radius: 0; padding-bottom: env(safe-area-inset-bottom); }
     .chatbot-launcher-label { display: none; }
     .chatbot-launcher { width: 3.25rem; height: 3.25rem; }
 }
