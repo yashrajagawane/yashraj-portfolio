@@ -374,20 +374,102 @@ const chatbotMessages = document.querySelector('.chatbot-messages');
 const chatbotForm = document.querySelector('.chatbot-form');
 const chatbotInput = document.querySelector('#chatbot-input');
 const chatbotSend = document.querySelector('.chatbot-send');
-const chatbotSuggestions = document.querySelectorAll('[data-chat-question]');
+const chatbotWelcome = document.querySelector('.chatbot-welcome');
+const chatbotQuickActions = document.querySelector('.chatbot-quick-actions');
+const chatbotSuggestions = document.querySelector('.chatbot-suggestions');
+const chatbotCta = document.querySelector('.chatbot-cta');
 
 if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm && chatbotInput) {
-    const welcomeMessage = "Hi! I'm Yashraj's portfolio assistant. Ask me about his projects, skills, education, or contact details.";
+    const welcomeMessage = "Hi! I'm Yashraj's AI portfolio assistant. I can help you explore his projects, skills, experience, education, resume, and contact information.";
+    const storageKey = 'yashraj-portfolio-assistant-history';
+    const projectCards = [...document.querySelectorAll('#projects .modern-project-card')].map(card => ({
+        name: card.querySelector('h3')?.textContent.trim(),
+        summary: card.querySelector('.project-header p')?.textContent.replace(/\s+/g, ' ').trim(),
+        technologies: [...card.querySelectorAll('.tech-tag')].map(tag => tag.textContent.replace(/\s+/g, ' ').trim()),
+        links: [...card.querySelectorAll('.project-links a')].map(link => ({ label: link.textContent.replace(/\s+/g, ' ').trim(), href: link.href }))
+    })).filter(project => project.name);
     let isChatbotBusy = false;
     let activeChatController = null;
+    let lastQuestion = '';
 
-    const addChatMessage = (text, role, temporary = false) => {
+    const saveHistory = () => {
+        const messages = [...chatbotMessages.querySelectorAll('.chatbot-message:not(.chatbot-message-loading)')]
+            .map(message => ({ text: message.textContent, role: message.dataset.role }))
+            .slice(-30);
+        try { localStorage.setItem(storageKey, JSON.stringify(messages)); } catch (error) { void error; }
+    };
+
+    const addChatMessage = (text, role, temporary = false, persist = true) => {
         const message = document.createElement('div');
         message.className = `chatbot-message chatbot-message-${role}${temporary ? ' chatbot-message-loading' : ''}`;
+        message.dataset.role = role;
+        message.setAttribute('role', role === 'assistant' ? 'status' : 'article');
+        message.setAttribute('aria-label', role === 'user' ? 'Your message' : 'Assistant message');
         message.textContent = text;
         chatbotMessages.appendChild(message);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        if (persist && !temporary) saveHistory();
         return message;
+    };
+
+    const existingLink = (selector) => document.querySelector(selector)?.href || '';
+
+    const renderCta = (question) => {
+        if (!chatbotCta) return;
+        chatbotCta.replaceChildren();
+        const query = question.toLowerCase();
+        const actions = [];
+        if (/project|built|work|ai\/ml|full stack/.test(query)) actions.push({ label: 'View Projects →', href: '#projects', className: 'chatbot-cta-primary' });
+        if (/skill|technology|tech stack/.test(query)) actions.push({ label: 'View Skills →', href: '#skills' });
+        if (/experience|hire|intern|collab/.test(query)) actions.push({ label: 'View Experience →', href: '#experience' });
+        if (/resume|cv/.test(query)) {
+            const resume = existingLink('a[href*="resume"], a[download]');
+            if (resume) actions.push({ label: 'Download Resume ↓', href: resume });
+        }
+        if (/github/.test(query)) actions.push({ label: 'View GitHub →', href: existingLink('a[href="https://github.com/yashrajagawane"]') });
+        if (/linkedin/.test(query)) actions.push({ label: 'View LinkedIn →', href: existingLink('a[href*="linkedin.com"]') });
+        if (/contact|email|reach/.test(query)) actions.push({ label: 'Contact Yashraj →', href: '#contact' });
+        actions.filter(action => action.href).slice(0, 2).forEach(action => {
+            const link = document.createElement('a');
+            link.className = `chatbot-cta-link ${action.className || ''}`;
+            link.href = action.href;
+            link.textContent = action.label;
+            if (/^https?:/.test(action.href)) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+            chatbotCta.appendChild(link);
+        });
+    };
+
+    const renderProjectCards = (question) => {
+        if (!/project|built|work|ai\/ml|full stack/.test(question.toLowerCase()) || !projectCards.length) return;
+        const query = question.toLowerCase();
+        const selected = projectCards.filter(project => query.includes(project.name.toLowerCase().split(' – ')[0])).slice(0, 1);
+        const cards = selected.length ? selected : projectCards.slice(0, 3);
+        cards.forEach(project => {
+            const card = document.createElement('article');
+            card.className = 'chatbot-project-card';
+            const title = document.createElement('h3'); title.textContent = `🚀 ${project.name}`;
+            const summary = document.createElement('p'); summary.textContent = project.summary;
+            const tech = document.createElement('p'); tech.className = 'chatbot-project-tech'; tech.textContent = project.technologies.join(' · ');
+            const links = document.createElement('div'); links.className = 'chatbot-project-links';
+            project.links.forEach(item => {
+                const link = document.createElement('a'); link.href = item.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = item.label.includes('GitHub') ? 'GitHub →' : 'View Project →';
+                links.appendChild(link);
+            });
+            card.append(title, summary, tech, links);
+            chatbotMessages.appendChild(card);
+        });
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    };
+
+    const renderSuggestions = (question = '') => {
+        if (!chatbotSuggestions) return;
+        chatbotSuggestions.replaceChildren();
+        const query = question.toLowerCase();
+        const options = /project/.test(query) ? [['🧠 AI/ML Work', 'Tell me about Yashraj\'s AI and machine learning work'], ['💻 Full Stack', 'Which full-stack projects has Yashraj built?']] :
+            /skill|technology|tech stack/.test(query) ? [['🛠 Tech Stack', 'What is Yashraj\'s tech stack?'], ['🚀 AI/ML Work', 'Tell me about Yashraj\'s AI/ML work']] :
+            [['🚀 Projects', 'What projects has Yashraj built?'], ['🛠 Tech Stack', 'What technologies does Yashraj know?'], ['👔 Why hire Yashraj?', 'Why should I hire Yashraj?']];
+        options.forEach(([label, value]) => { const button = document.createElement('button'); button.type = 'button'; button.dataset.chatQuestion = value; button.textContent = label; chatbotSuggestions.appendChild(button); });
+        chatbotSuggestions.querySelectorAll('button').forEach(button => button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion)));
     };
 
     const setChatbotOpen = (open) => {
@@ -395,6 +477,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         chatbotLauncher.setAttribute('aria-expanded', String(open));
         chatbotLauncher.setAttribute('aria-label', open ? 'Close portfolio assistant' : 'Open portfolio assistant');
         chatbot.classList.toggle('is-open', open);
+        document.body.classList.toggle('chatbot-open', open);
         if (open) {
             if (!chatbotMessages.children.length) addChatMessage(welcomeMessage, 'assistant');
             window.setTimeout(() => chatbotInput.focus({ preventScroll: true }), 50);
@@ -416,6 +499,8 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         if (!message || isChatbotBusy) return;
 
         addChatMessage(message, 'user');
+        chatbot.classList.add('has-conversation');
+        lastQuestion = message;
         chatbotInput.value = '';
         chatbotInput.style.height = 'auto';
         const loadingMessage = addChatMessage('Thinking...', 'assistant', true);
@@ -469,6 +554,10 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
             if (streamError) throw new Error(streamError);
             if (!loadingMessage.textContent.trim() || loadingMessage.textContent === 'Thinking...') throw new Error('The assistant did not return a response.');
             loadingMessage.classList.remove('chatbot-message-loading');
+            renderProjectCards(lastQuestion);
+            renderCta(lastQuestion);
+            renderSuggestions(lastQuestion);
+            saveHistory();
         } catch (error) {
             loadingMessage.remove();
             if (error.name === 'AbortError') return;
@@ -487,7 +576,11 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
     });
     chatbotClear?.addEventListener('click', () => {
         chatbotMessages.replaceChildren();
+        chatbot.classList.remove('has-conversation');
+        chatbotCta?.replaceChildren();
+        try { localStorage.removeItem(storageKey); } catch (error) { void error; }
         addChatMessage(welcomeMessage, 'assistant');
+        renderSuggestions();
         chatbotInput.focus({ preventScroll: true });
     });
 
@@ -508,9 +601,13 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         }
     });
 
-    chatbotSuggestions.forEach(button => {
-        button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion || ''));
-    });
+    try {
+        const history = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        history.forEach(item => addChatMessage(item.text, item.role, false, false));
+    } catch (error) { void error; }
+    renderSuggestions();
+    chatbotQuickActions?.querySelectorAll('button').forEach(button => button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion || '')));
+    if (chatbotMessages.children.length > 1) chatbot.classList.add('has-conversation');
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && !chatbotPanel.hidden) setChatbotOpen(false);
