@@ -377,9 +377,10 @@ const chatbotSend = document.querySelector('.chatbot-send');
 const chatbotQuickActions = document.querySelector('.chatbot-quick-actions');
 const chatbotCta = document.querySelector('.chatbot-cta');
 const chatbotExpand = document.querySelector('.chatbot-expand');
+const chatbotInfo = document.querySelector('.chatbot-info');
+const chatbotAbout = document.querySelector('.chatbot-about');
 
 if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm && chatbotInput) {
-    const welcomeMessage = "Hi! I'm Yashraj's AI portfolio assistant. I can help you explore his projects, skills, experience, education, resume, and contact information.";
     const storageKey = 'yashraj-portfolio-assistant-history';
     const projectCards = [...document.querySelectorAll('#projects .modern-project-card')].map(card => ({
         name: card.querySelector('h3')?.textContent.trim(),
@@ -467,7 +468,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         chatbot.classList.toggle('is-open', open);
         document.body.classList.toggle('chatbot-open', open);
         if (open) {
-            if (!chatbotMessages.children.length) addChatMessage(welcomeMessage, 'assistant');
             window.setTimeout(() => chatbotInput.focus({ preventScroll: true }), 50);
         } else {
             chatbotLauncher.focus({ preventScroll: true });
@@ -572,7 +572,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         chatbot.classList.remove('has-conversation');
         chatbotCta?.replaceChildren();
         try { localStorage.removeItem(storageKey); } catch (error) { void error; }
-        addChatMessage(welcomeMessage, 'assistant');
         chatbotInput.focus({ preventScroll: true });
     });
 
@@ -608,6 +607,12 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         const icon = chatbotExpand.querySelector('i');
         icon?.classList.toggle('fa-expand', !expanded);
         icon?.classList.toggle('fa-compress', expanded);
+    });
+
+    chatbotInfo?.addEventListener('click', () => {
+        const expanded = chatbotInfo.getAttribute('aria-expanded') === 'true';
+        chatbotInfo.setAttribute('aria-expanded', String(!expanded));
+        if (chatbotAbout) chatbotAbout.hidden = expanded;
     });
 
     document.addEventListener('keydown', (event) => {
