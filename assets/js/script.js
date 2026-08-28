@@ -374,10 +374,9 @@ const chatbotMessages = document.querySelector('.chatbot-messages');
 const chatbotForm = document.querySelector('.chatbot-form');
 const chatbotInput = document.querySelector('#chatbot-input');
 const chatbotSend = document.querySelector('.chatbot-send');
-const chatbotWelcome = document.querySelector('.chatbot-welcome');
 const chatbotQuickActions = document.querySelector('.chatbot-quick-actions');
-const chatbotSuggestions = document.querySelector('.chatbot-suggestions');
 const chatbotCta = document.querySelector('.chatbot-cta');
+const chatbotExpand = document.querySelector('.chatbot-expand');
 
 if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm && chatbotInput) {
     const welcomeMessage = "Hi! I'm Yashraj's AI portfolio assistant. I can help you explore his projects, skills, experience, education, resume, and contact information.";
@@ -459,17 +458,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
             chatbotMessages.appendChild(card);
         });
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    };
-
-    const renderSuggestions = (question = '') => {
-        if (!chatbotSuggestions) return;
-        chatbotSuggestions.replaceChildren();
-        const query = question.toLowerCase();
-        const options = /project/.test(query) ? [['🧠 AI/ML Work', 'Tell me about Yashraj\'s AI and machine learning work'], ['💻 Full Stack', 'Which full-stack projects has Yashraj built?']] :
-            /skill|technology|tech stack/.test(query) ? [['🛠 Tech Stack', 'What is Yashraj\'s tech stack?'], ['🚀 AI/ML Work', 'Tell me about Yashraj\'s AI/ML work']] :
-            [['🚀 Projects', 'What projects has Yashraj built?'], ['🛠 Tech Stack', 'What technologies does Yashraj know?'], ['👔 Why hire Yashraj?', 'Why should I hire Yashraj?']];
-        options.forEach(([label, value]) => { const button = document.createElement('button'); button.type = 'button'; button.dataset.chatQuestion = value; button.textContent = label; chatbotSuggestions.appendChild(button); });
-        chatbotSuggestions.querySelectorAll('button').forEach(button => button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion)));
     };
 
     const setChatbotOpen = (open) => {
@@ -562,7 +550,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
             loadingMessage.classList.remove('chatbot-message-loading');
             renderProjectCards(lastQuestion);
             renderCta(lastQuestion);
-            renderSuggestions(lastQuestion);
             saveHistory();
         } catch (error) {
             loadingMessage.remove();
@@ -586,7 +573,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         chatbotCta?.replaceChildren();
         try { localStorage.removeItem(storageKey); } catch (error) { void error; }
         addChatMessage(welcomeMessage, 'assistant');
-        renderSuggestions();
         chatbotInput.focus({ preventScroll: true });
     });
 
@@ -611,9 +597,18 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         const history = JSON.parse(localStorage.getItem(storageKey) || '[]');
         history.forEach(item => addChatMessage(item.text, item.role, false, false));
     } catch (error) { void error; }
-    renderSuggestions();
     chatbotQuickActions?.querySelectorAll('button').forEach(button => button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion || '')));
     if (chatbotMessages.children.length > 1) chatbot.classList.add('has-conversation');
+
+    chatbotExpand?.addEventListener('click', () => {
+        const expanded = chatbot.classList.toggle('is-expanded');
+        chatbotExpand.setAttribute('aria-pressed', String(expanded));
+        chatbotExpand.setAttribute('aria-label', expanded ? 'Reduce assistant' : 'Expand assistant');
+        chatbotExpand.setAttribute('title', expanded ? 'Reduce assistant' : 'Expand assistant');
+        const icon = chatbotExpand.querySelector('i');
+        icon?.classList.toggle('fa-expand', !expanded);
+        icon?.classList.toggle('fa-compress', expanded);
+    });
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && !chatbotPanel.hidden) setChatbotOpen(false);
