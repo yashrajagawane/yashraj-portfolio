@@ -193,6 +193,8 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(html, /far fa-comment/);
     assert.match(html, /aria-modal="true"/);
     assert.match(html, /chatbot-quick-actions/);
+    assert.match(html, /chatbot-welcome[\s\S]*chatbot-quick-actions/);
+    assert.match(html, /Starter questions/);
     assert.match(html, /chatbot-expand/);
     assert.match(html, /chatbot-info/);
     assert.match(html, /Hi! I'm Yashraj's AI portfolio assistant/);
@@ -205,6 +207,8 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(script, /renderProjectCards/);
     assert.match(script, /Here are a few projects from Yashraj/);
     assert.match(script, /is-expanded/);
+    assert.match(script, /querySelectorAll\('\.chatbot-message, \.chatbot-project-card'\)/);
+    assert.match(script, /querySelector\('\.chatbot-message'\)/);
     assert.doesNotMatch(html, /chatbot-minimize/);
     assert.doesNotMatch(script, /is-minimized/);
     assert.doesNotMatch(html, /🛠 Tech Stack|👔 Why hire Yashraj\?/);

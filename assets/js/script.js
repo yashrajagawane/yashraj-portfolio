@@ -568,7 +568,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         setChatbotOpen(false);
     });
     chatbotClear?.addEventListener('click', () => {
-        chatbotMessages.replaceChildren();
+        chatbotMessages.querySelectorAll('.chatbot-message, .chatbot-project-card').forEach(message => message.remove());
         chatbot.classList.remove('has-conversation');
         chatbotCta?.replaceChildren();
         try { localStorage.removeItem(storageKey); } catch (error) { void error; }
@@ -597,7 +597,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         history.forEach(item => addChatMessage(item.text, item.role, false, false));
     } catch (error) { void error; }
     chatbotQuickActions?.querySelectorAll('button').forEach(button => button.addEventListener('click', () => sendChatMessage(button.dataset.chatQuestion || '')));
-    if (chatbotMessages.children.length > 1) chatbot.classList.add('has-conversation');
+    if (chatbotMessages.querySelector('.chatbot-message')) chatbot.classList.add('has-conversation');
 
     chatbotExpand?.addEventListener('click', () => {
         const expanded = chatbot.classList.toggle('is-expanded');
