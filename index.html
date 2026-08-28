@@ -869,7 +869,6 @@
                     <span class="chatbot-avatar" aria-hidden="true">YA</span>
                     <div>
                         <h2 id="chatbot-title">Yashraj's AI Assistant</h2>
-                        <p>AI Powered Portfolio</p>
                     </div>
                 </div>
                 <div class="chatbot-header-actions">
@@ -878,9 +877,6 @@
                     </button>
                     <button class="chatbot-icon-btn chatbot-clear" type="button" aria-label="Clear conversation" title="Clear conversation">
                         <i class="fas fa-trash-can" aria-hidden="true"></i>
-                    </button>
-                    <button class="chatbot-icon-btn chatbot-minimize" type="button" aria-label="Minimize assistant" aria-pressed="false" title="Minimize assistant">
-                        <i class="fas fa-minus" aria-hidden="true"></i>
                     </button>
                     <button class="chatbot-icon-btn chatbot-expand" type="button" aria-label="Expand assistant" aria-pressed="false" title="Expand assistant">
                         <i class="fas fa-expand" aria-hidden="true"></i>
@@ -894,19 +890,21 @@
                 This assistant answers from Yashraj's public portfolio data and does not store your conversation.
             </div>
 
-            <div class="chatbot-welcome" aria-label="Assistant quick actions">
-                <p class="chatbot-welcome-title">Hi, I'm Yashraj's AI Assistant</p>
-                <p class="chatbot-welcome-copy">I can answer questions about Yashraj's projects, technical skills, education, and professional journey.</p>
-                <div class="chatbot-quick-actions">
-                    <button type="button" data-chat-question="What projects has Yashraj built?"><span aria-hidden="true">▣</span> Explore Projects</button>
-                    <button type="button" data-chat-question="What technologies and skills does Yashraj know?"><span aria-hidden="true">✦</span> View Skills</button>
-                    <button type="button" data-chat-question="What professional experience does Yashraj have?"><span aria-hidden="true">◈</span> Professional Journey</button>
-                    <button type="button" data-chat-question="What are Yashraj's AI and machine learning interests?"><span aria-hidden="true">✧</span> AI Interests</button>
-                    <button type="button" data-chat-question="Does Yashraj have a resume available?"><span aria-hidden="true">▤</span> Resume</button>
-                    <button type="button" data-chat-question="How can I contact Yashraj?"><span aria-hidden="true">✉</span> Contact</button>
+            <div class="chatbot-messages" aria-live="polite" aria-relevant="additions" tabindex="0">
+                <div class="chatbot-welcome" aria-label="Assistant introduction and first questions">
+                    <p class="chatbot-welcome-title">Hi! I'm Yashraj's AI portfolio assistant.</p>
+                    <p class="chatbot-welcome-copy">I can help you explore his projects, skills, experience, education, resume, and contact information.</p>
+                    <p class="chatbot-welcome-prompt">Ask the portfolio assistant anything, or choose an option to get started.</p>
+                    <div class="chatbot-quick-actions">
+                        <button type="button" data-chat-question="What projects has Yashraj built?"><span aria-hidden="true">▣</span> Explore Projects</button>
+                        <button type="button" data-chat-question="What technologies and skills does Yashraj know?"><span aria-hidden="true">✦</span> View Skills</button>
+                        <button type="button" data-chat-question="What professional experience does Yashraj have?"><span aria-hidden="true">◈</span> Professional Journey</button>
+                        <button type="button" data-chat-question="What are Yashraj's AI and machine learning interests?"><span aria-hidden="true">✧</span> AI Interests</button>
+                        <button type="button" data-chat-question="Does Yashraj have a resume available?"><span aria-hidden="true">▤</span> Resume</button>
+                        <button type="button" data-chat-question="How can I contact Yashraj?"><span aria-hidden="true">✉</span> Contact</button>
+                    </div>
                 </div>
             </div>
-            <div class="chatbot-messages" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
             <div class="chatbot-cta" aria-label="Related portfolio links"></div>
 
             <form class="chatbot-form">

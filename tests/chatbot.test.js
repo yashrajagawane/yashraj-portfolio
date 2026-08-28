@@ -195,8 +195,7 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(html, /chatbot-quick-actions/);
     assert.match(html, /chatbot-expand/);
     assert.match(html, /chatbot-info/);
-    assert.match(html, /chatbot-minimize/);
-    assert.match(html, /Hi, I'm Yashraj's AI Assistant/);
+    assert.match(html, /Hi! I'm Yashraj's AI portfolio assistant/);
     assert.match(html, /data-chat-question="What projects has Yashraj built\?"/);
     assert.match(html, /AI Interests/);
     assert.match(html, /chatbot-cta/);
@@ -206,7 +205,8 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(script, /renderProjectCards/);
     assert.match(script, /Here are a few projects from Yashraj/);
     assert.match(script, /is-expanded/);
-    assert.match(script, /is-minimized/);
+    assert.doesNotMatch(html, /chatbot-minimize/);
+    assert.doesNotMatch(script, /is-minimized/);
     assert.doesNotMatch(html, /🛠 Tech Stack|👔 Why hire Yashraj\?/);
     assert.doesNotMatch(html, /chatbot-suggestions/);
     assert.doesNotMatch(script, /chatbotSuggestions\.forEach/);
