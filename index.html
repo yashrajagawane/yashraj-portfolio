@@ -866,21 +866,24 @@
         <div class="chatbot-panel glass-card" id="chatbot-panel" role="dialog" aria-modal="true" aria-labelledby="chatbot-title" hidden>
             <div class="chatbot-header">
                 <div class="chatbot-heading">
-                    <span class="chatbot-avatar" aria-hidden="true"><i class="fas fa-robot"></i></span>
+                    <span class="chatbot-avatar" aria-hidden="true">YA</span>
                     <div>
-                        <h2 id="chatbot-title">Yashraj AI Assistant</h2>
-                        <p>AI-powered portfolio concierge</p>
+                        <h2 id="chatbot-title">Yashraj's AI Assistant</h2>
+                        <p>AI Powered Portfolio</p>
                     </div>
                 </div>
                 <div class="chatbot-header-actions">
                     <button class="chatbot-icon-btn chatbot-info" type="button" aria-label="About this assistant" aria-expanded="false" title="About this assistant">
                         <i class="fas fa-gear" aria-hidden="true"></i>
                     </button>
-                    <button class="chatbot-icon-btn chatbot-expand" type="button" aria-label="Expand assistant" aria-pressed="false" title="Expand assistant">
-                        <i class="fas fa-expand" aria-hidden="true"></i>
-                    </button>
                     <button class="chatbot-icon-btn chatbot-clear" type="button" aria-label="Clear conversation" title="Clear conversation">
                         <i class="fas fa-trash-can" aria-hidden="true"></i>
+                    </button>
+                    <button class="chatbot-icon-btn chatbot-minimize" type="button" aria-label="Minimize assistant" aria-pressed="false" title="Minimize assistant">
+                        <i class="fas fa-minus" aria-hidden="true"></i>
+                    </button>
+                    <button class="chatbot-icon-btn chatbot-expand" type="button" aria-label="Expand assistant" aria-pressed="false" title="Expand assistant">
+                        <i class="fas fa-expand" aria-hidden="true"></i>
                     </button>
                     <button class="chatbot-icon-btn chatbot-close" type="button" aria-label="Close portfolio assistant" title="Close">
                         <i class="fas fa-xmark" aria-hidden="true"></i>
@@ -897,7 +900,7 @@
                 <div class="chatbot-quick-actions">
                     <button type="button" data-chat-question="What projects has Yashraj built?"><span aria-hidden="true">▣</span> Explore Projects</button>
                     <button type="button" data-chat-question="What technologies and skills does Yashraj know?"><span aria-hidden="true">✦</span> View Skills</button>
-                    <button type="button" data-chat-question="What experience does Yashraj have?"><span aria-hidden="true">◈</span> Experience</button>
+                    <button type="button" data-chat-question="What professional experience does Yashraj have?"><span aria-hidden="true">◈</span> Professional Journey</button>
                     <button type="button" data-chat-question="What is Yashraj studying?"><span aria-hidden="true">◇</span> Education</button>
                     <button type="button" data-chat-question="Does Yashraj have a resume available?"><span aria-hidden="true">▤</span> Resume</button>
                     <button type="button" data-chat-question="How can I contact Yashraj?"><span aria-hidden="true">✉</span> Contact</button>
@@ -908,7 +911,7 @@
 
             <form class="chatbot-form">
                 <label class="sr-only" for="chatbot-input">Ask the portfolio assistant</label>
-                <textarea id="chatbot-input" rows="1" maxlength="1000" placeholder="Ask anything about Yashraj..." autocomplete="off"></textarea>
+                <textarea id="chatbot-input" rows="1" maxlength="1000" placeholder="Ask anything about Yashraj's projects, skills, experience..." autocomplete="off"></textarea>
                 <button class="chatbot-send" type="submit" aria-label="Send message" title="Send message">
                     <i class="fas fa-arrow-up" aria-hidden="true"></i>
                 </button>

@@ -377,6 +377,7 @@ const chatbotSend = document.querySelector('.chatbot-send');
 const chatbotQuickActions = document.querySelector('.chatbot-quick-actions');
 const chatbotCta = document.querySelector('.chatbot-cta');
 const chatbotExpand = document.querySelector('.chatbot-expand');
+const chatbotMinimize = document.querySelector('.chatbot-minimize');
 const chatbotInfo = document.querySelector('.chatbot-info');
 const chatbotAbout = document.querySelector('.chatbot-about');
 
@@ -466,6 +467,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         chatbotLauncher.setAttribute('aria-expanded', String(open));
         chatbotLauncher.setAttribute('aria-label', open ? 'Close portfolio assistant' : 'Open portfolio assistant');
         chatbot.classList.toggle('is-open', open);
+        chatbot.classList.remove('is-minimized');
         document.body.classList.toggle('chatbot-open', open);
         if (open) {
             window.setTimeout(() => chatbotInput.focus({ preventScroll: true }), 50);
@@ -607,6 +609,16 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         const icon = chatbotExpand.querySelector('i');
         icon?.classList.toggle('fa-expand', !expanded);
         icon?.classList.toggle('fa-compress', expanded);
+    });
+
+    chatbotMinimize?.addEventListener('click', () => {
+        const minimized = chatbot.classList.toggle('is-minimized');
+        chatbotMinimize.setAttribute('aria-pressed', String(minimized));
+        chatbotMinimize.setAttribute('aria-label', minimized ? 'Restore assistant' : 'Minimize assistant');
+        chatbotMinimize.setAttribute('title', minimized ? 'Restore assistant' : 'Minimize assistant');
+        const icon = chatbotMinimize.querySelector('i');
+        icon?.classList.toggle('fa-minus', !minimized);
+        icon?.classList.toggle('fa-window-maximize', minimized);
     });
 
     chatbotInfo?.addEventListener('click', () => {

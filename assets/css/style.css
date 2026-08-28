@@ -1521,6 +1521,10 @@ min-width:0;
     border: 1px solid rgba(255, 170, 170, 0.55);
     border-radius: 50%;
     color: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
     background: rgba(255, 59, 59, 0.22);
     box-shadow: 0 0 18px rgba(255, 59, 59, 0.18);
 }
@@ -1590,6 +1594,9 @@ min-width:0;
 .chatbot-quick-actions span { margin-right: 0.25rem; }
 
 .chatbot.is-expanded .chatbot-panel { width: min(560px, calc(100vw - 2rem)); height: min(800px, calc(100vh - 3rem)); }
+.chatbot.is-minimized .chatbot-panel { height: auto; min-height: 0; }
+.chatbot.is-minimized .chatbot-panel > :not(.chatbot-header) { display: none; }
+.chatbot.is-minimized .chatbot-header { border-bottom: 0; border-radius: 18px; }
 
 .chatbot-cta { display: flex; flex-wrap: wrap; gap: 0.45rem; padding: 0 1rem 0.7rem; }
 .chatbot-cta:empty { display: none; }

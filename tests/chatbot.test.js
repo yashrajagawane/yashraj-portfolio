@@ -189,12 +189,13 @@ test('widget includes accessible launcher and streaming controls', () => {
     const script = fs.readFileSync('assets/js/script.js', 'utf8');
     assert.match(html, /aria-controls="chatbot-panel"/);
     assert.match(html, /aria-live="polite"/);
-    assert.match(html, /Yashraj AI/);
+    assert.match(html, /Yashraj's AI/);
     assert.match(html, /far fa-comment/);
     assert.match(html, /aria-modal="true"/);
     assert.match(html, /chatbot-quick-actions/);
     assert.match(html, /chatbot-expand/);
     assert.match(html, /chatbot-info/);
+    assert.match(html, /chatbot-minimize/);
     assert.match(html, /Hi, I'm Yashraj's AI Assistant/);
     assert.match(html, /data-chat-question="What projects has Yashraj built\?"/);
     assert.match(html, /chatbot-cta/);
@@ -204,6 +205,7 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(script, /renderProjectCards/);
     assert.match(script, /Here are a few projects from Yashraj/);
     assert.match(script, /is-expanded/);
+    assert.match(script, /is-minimized/);
     assert.doesNotMatch(html, /🛠 Tech Stack|👔 Why hire Yashraj\?/);
     assert.doesNotMatch(html, /chatbot-suggestions/);
     assert.doesNotMatch(script, /chatbotSuggestions\.forEach/);
