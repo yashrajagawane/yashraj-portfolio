@@ -1633,6 +1633,8 @@ min-width:0;
     max-height: 120px;
     min-height: 1.55rem;
     resize: none;
+    overflow: hidden;
+    scrollbar-width: none;
     border: 0;
     outline: 0;
     color: #ffffff;
@@ -1641,6 +1643,7 @@ min-width:0;
     font-size: 0.86rem;
     line-height: 1.5;
 }
+.chatbot-form textarea::-webkit-scrollbar { display: none; }
 .chatbot-form textarea::placeholder { color: #858585; }
 .chatbot-form:focus-within { border-color: rgba(255, 122, 122, 0.65); box-shadow: 0 0 18px rgba(255, 59, 59, 0.12); }
 .chatbot-send {
@@ -1655,9 +1658,6 @@ min-width:0;
 }
 .chatbot-send:hover:not(:disabled), .chatbot-send:focus-visible:not(:disabled) { box-shadow: 0 0 16px rgba(255, 59, 59, 0.4); }
 .chatbot-send:disabled { cursor: wait; opacity: 0.5; }
-.chatbot-disclaimer { margin: 0; padding: 0.55rem 1rem 0.75rem; color: #777777; font-size: 0.65rem; text-align: center; }
-.chatbot-shortcut { margin: 0; padding: 0.55rem 1rem 0; color: #8f8f8f; font-size: 0.68rem; text-align: center; }
-
 .sr-only {
     position: absolute;
     width: 1px;
