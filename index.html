@@ -866,13 +866,16 @@
         <div class="chatbot-panel glass-card" id="chatbot-panel" role="dialog" aria-modal="true" aria-labelledby="chatbot-title" hidden>
             <div class="chatbot-header">
                 <div class="chatbot-heading">
-                    <span class="chatbot-status-dot" aria-hidden="true"></span>
+                    <span class="chatbot-avatar" aria-hidden="true"><i class="fas fa-robot"></i></span>
                     <div>
-                        <h2 id="chatbot-title">Yashraj AI</h2>
-                        <p>Portfolio Assistant</p>
+                        <h2 id="chatbot-title">Yashraj AI Assistant</h2>
+                        <p>AI-powered portfolio concierge</p>
                     </div>
                 </div>
                 <div class="chatbot-header-actions">
+                    <button class="chatbot-icon-btn chatbot-expand" type="button" aria-label="Expand assistant" aria-pressed="false" title="Expand assistant">
+                        <i class="fas fa-expand" aria-hidden="true"></i>
+                    </button>
                     <button class="chatbot-icon-btn chatbot-clear" type="button" aria-label="Clear conversation" title="Clear conversation">
                         <i class="fas fa-trash-can" aria-hidden="true"></i>
                     </button>
@@ -886,16 +889,15 @@
                 <p class="chatbot-welcome-title">What would you like to explore?</p>
                 <p class="chatbot-welcome-copy">Projects, skills, experience, education, resume and contact information — all grounded in Yashraj's portfolio.</p>
                 <div class="chatbot-quick-actions">
-                    <button type="button" data-chat-question="What projects has Yashraj built?"><span aria-hidden="true">🚀</span> Projects</button>
-                    <button type="button" data-chat-question="What technologies and skills does Yashraj know?"><span aria-hidden="true">🧠</span> Skills</button>
-                    <button type="button" data-chat-question="What experience does Yashraj have?"><span aria-hidden="true">💼</span> Experience</button>
-                    <button type="button" data-chat-question="What is Yashraj studying?"><span aria-hidden="true">🎓</span> Education</button>
-                    <button type="button" data-chat-question="Does Yashraj have a resume available?"><span aria-hidden="true">📄</span> Resume</button>
-                    <button type="button" data-chat-question="How can I contact Yashraj?"><span aria-hidden="true">📬</span> Contact</button>
+                    <button type="button" data-chat-question="What projects has Yashraj built?"><span aria-hidden="true">▣</span> Explore Projects</button>
+                    <button type="button" data-chat-question="What technologies and skills does Yashraj know?"><span aria-hidden="true">✦</span> View Skills</button>
+                    <button type="button" data-chat-question="What experience does Yashraj have?"><span aria-hidden="true">◈</span> Experience</button>
+                    <button type="button" data-chat-question="What is Yashraj studying?"><span aria-hidden="true">◇</span> Education</button>
+                    <button type="button" data-chat-question="Does Yashraj have a resume available?"><span aria-hidden="true">▤</span> Resume</button>
+                    <button type="button" data-chat-question="How can I contact Yashraj?"><span aria-hidden="true">✉</span> Contact</button>
                 </div>
             </div>
             <div class="chatbot-messages" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
-            <div class="chatbot-suggestions" aria-label="Suggested questions"></div>
             <div class="chatbot-cta" aria-label="Related portfolio links"></div>
 
             <form class="chatbot-form">
@@ -905,6 +907,7 @@
                     <i class="fas fa-arrow-up" aria-hidden="true"></i>
                 </button>
             </form>
+            <p class="chatbot-shortcut">Enter to send · Shift + Enter for a new line</p>
             <p class="chatbot-disclaimer">AI assistant · Based on portfolio data</p>
         </div>
     </section>
