@@ -198,6 +198,7 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(html, /chatbot-minimize/);
     assert.match(html, /Hi, I'm Yashraj's AI Assistant/);
     assert.match(html, /data-chat-question="What projects has Yashraj built\?"/);
+    assert.match(html, /AI Interests/);
     assert.match(html, /chatbot-cta/);
     assert.match(script, /\/api\/chat\?stream=1/);
     assert.match(script, /AbortController/);
