@@ -378,12 +378,6 @@ h1, h2, h3, h4, h5, h6 {
     flex-wrap: wrap;
 }
 
-.hero-buttons .glow-btn {
-    width: 150px;
-    justify-content: center;
-    padding-inline: 0.75rem;
-}
-
 .social-icons {
     display: flex;
     gap: 1.2rem;
