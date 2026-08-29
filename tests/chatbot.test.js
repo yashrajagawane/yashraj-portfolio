@@ -217,6 +217,11 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.doesNotMatch(script, /chatbotSuggestions\.forEach/);
 });
 
+test('homepage action buttons share a consistent width', () => {
+    const css = fs.readFileSync('assets/css/style.css', 'utf8');
+    assert.match(css, /\.hero-buttons \.glow-btn[\s\S]*width:\s*150px/);
+});
+
 test('metrics snapshot is aggregate-only and resettable', () => {
     const metrics = createMetrics({ now: () => 1700000000000 });
     metrics.recordRequest();
