@@ -217,6 +217,13 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.doesNotMatch(script, /chatbotSuggestions\.forEach/);
 });
 
+test('supplied social links are wired in homepage and contact sections', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert.equal((html.match(/https:\/\/www\.instagram\.com\/yashraj_\.cr7\//g) || []).length, 2);
+    assert.equal((html.match(/https:\/\/wa\.me\/917058400490/g) || []).length, 2);
+    assert.equal((html.match(/https:\/\/t\.me\/\+917058400490/g) || []).length, 2);
+});
+
 test('metrics snapshot is aggregate-only and resettable', () => {
     const metrics = createMetrics({ now: () => 1700000000000 });
     metrics.recordRequest();
