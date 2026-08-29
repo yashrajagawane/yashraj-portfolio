@@ -191,6 +191,7 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(html, /aria-live="polite"/);
     assert.match(html, /Yashraj's AI/);
     assert.match(html, /fas fa-robot/);
+    assert.match(html, /Ask my AI Assistent/);
     assert.match(html, /aria-modal="true"/);
     assert.match(html, /chatbot-quick-actions/);
     assert.match(html, /chatbot-welcome[\s\S]*chatbot-quick-actions/);

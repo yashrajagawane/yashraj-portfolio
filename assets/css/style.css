@@ -1429,8 +1429,8 @@ min-width:0;
 
 .chatbot-launcher {
     display: inline-flex;
-    width: 3.45rem;
-    height: 3.45rem;
+    width: 3.15rem;
+    height: 3.15rem;
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
@@ -1457,12 +1457,13 @@ min-width:0;
     position: absolute;
     right: calc(100% + 0.7rem);
     width: max-content;
-    padding: 0.55rem 0.75rem;
+    padding: 0.42rem 0.6rem;
     border: 1px solid rgba(255, 100, 100, 0.55);
     border-radius: 9px;
     color: #fff;
     background: rgba(35, 5, 10, 0.96);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 35, 65, 0.24);
+    font-size: 0.76rem;
     opacity: 0;
     pointer-events: none;
     transform: translateX(0.35rem);
