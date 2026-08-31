@@ -394,9 +394,48 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
 
     const saveHistory = () => {
         const messages = [...chatbotMessages.querySelectorAll('.chatbot-message:not(.chatbot-message-loading)')]
-            .map(message => ({ text: message.textContent, role: message.dataset.role }))
+            .map(message => ({ text: message.dataset.rawText || message.textContent, role: message.dataset.role }))
             .slice(-30);
         try { localStorage.setItem(storageKey, JSON.stringify(messages)); } catch (error) { void error; }
+    };
+
+    const renderAssistantMarkdown = (message, text) => {
+        const fragment = document.createDocumentFragment();
+        const inlinePattern = /(\*\*[^*]+\*\*|__[^_]+__|\[([^\]]+)\]\((https?:\/\/[^\s)]+|#[^\s)]+|mailto:[^\s)]+)\))/g;
+        text.split('\n').forEach((line, index) => {
+            if (index > 0) fragment.appendChild(document.createElement('br'));
+            const lineContainer = document.createElement('span');
+            lineContainer.className = 'chatbot-markdown-line';
+            const isBullet = /^\s*[-*]\s+/.test(line);
+            const content = isBullet ? line.replace(/^\s*[-*]\s+/, '') : line;
+            if (isBullet) {
+                const bullet = document.createElement('span');
+                bullet.className = 'chatbot-markdown-bullet';
+                bullet.textContent = '•';
+                lineContainer.appendChild(bullet);
+            }
+            let cursor = 0;
+            content.replace(inlinePattern, (match, token, linkText, href, offset) => {
+                lineContainer.appendChild(document.createTextNode(content.slice(cursor, offset)));
+                if (token.startsWith('**') || token.startsWith('__')) {
+                    const strong = document.createElement('strong');
+                    strong.textContent = token.slice(2, -2);
+                    lineContainer.appendChild(strong);
+                } else {
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.textContent = linkText;
+                    if (/^https?:/.test(href)) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+                    lineContainer.appendChild(link);
+                }
+                cursor = offset + match.length;
+                return match;
+            });
+            lineContainer.appendChild(document.createTextNode(content.slice(cursor)));
+            fragment.appendChild(lineContainer);
+        });
+        message.replaceChildren(fragment);
+        message.dataset.rawText = text;
     };
 
     const addChatMessage = (text, role, temporary = false, persist = true) => {
@@ -405,7 +444,9 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         message.dataset.role = role;
         message.setAttribute('role', role === 'assistant' ? 'status' : 'article');
         message.setAttribute('aria-label', role === 'user' ? 'Your message' : 'Assistant message');
-        message.textContent = text;
+        if (role === 'assistant') renderAssistantMarkdown(message, text);
+        else message.textContent = text;
+        message.dataset.rawText = text;
         chatbotMessages.appendChild(message);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         if (persist && !temporary) saveHistory();
@@ -524,11 +565,11 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
                 if (event.startsWith('event: token')) {
                     if (isProjectQuestion) return;
                     if (!hasStreamText) {
-                        loadingMessage.textContent = '';
+                        renderAssistantMarkdown(loadingMessage, '');
                         hasStreamText = true;
                     }
                     loadingMessage.classList.remove('chatbot-message-loading');
-                    loadingMessage.textContent += payload.text || '';
+                    renderAssistantMarkdown(loadingMessage, (loadingMessage.dataset.rawText || '') + (payload.text || ''));
                     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
                 }
             };
@@ -543,7 +584,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
             if (buffer.trim()) consumeEvent(buffer);
             if (streamError) throw new Error(streamError);
             if (isProjectQuestion) {
-                loadingMessage.textContent = 'Here are a few projects from Yashraj\'s portfolio:';
+                renderAssistantMarkdown(loadingMessage, 'Here are a few projects from Yashraj\'s portfolio:');
                 loadingMessage.classList.remove('chatbot-message-loading');
             }
             if (!loadingMessage.textContent.trim() || loadingMessage.textContent === 'Thinking...') throw new Error('The assistant did not return a response.');

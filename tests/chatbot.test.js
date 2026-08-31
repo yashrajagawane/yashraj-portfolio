@@ -206,6 +206,9 @@ test('widget includes accessible launcher and streaming controls', () => {
     assert.match(script, /AbortController/);
     assert.match(script, /localStorage/);
     assert.match(script, /renderProjectCards/);
+    assert.match(script, /renderAssistantMarkdown/);
+    assert.match(script, /createElement\('strong'\)/);
+    assert.match(script, /chatbot-markdown-bullet/);
     assert.match(script, /Here are a few projects from Yashraj/);
     assert.match(script, /is-expanded/);
     assert.match(script, /querySelectorAll\('\.chatbot-message, \.chatbot-project-card'\)/);
