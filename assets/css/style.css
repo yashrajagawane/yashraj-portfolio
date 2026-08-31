@@ -871,7 +871,7 @@ min-width:0;
 
 /* Modern Project Card Styling */
 .modern-project-card {
-    flex: 0 0 320px;
+    flex: 0 0 380px;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
@@ -879,7 +879,7 @@ min-width:0;
     padding: 1.2rem;
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: auto;
     cursor: pointer;
     background: var(--card-bg, rgba(255, 255, 255, 0.03));
     border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
@@ -950,7 +950,7 @@ min-width:0;
 
 /* Project Header (Title & Description) */
 .project-header {
-    min-height: 240px;
+    min-height: 0;
     margin-bottom: 1.2rem;
 }
 
@@ -1008,7 +1008,7 @@ min-width:0;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.6rem; /* Scaled down gap between buttons */
-    margin-top: auto; /* Pins the action row to the bottom so cards align */
+    margin-top: 0;
     padding-top: 0.6rem;
 }
 
@@ -1082,7 +1082,7 @@ min-width:0;
 }
 
 @media screen and (max-width: 1200px) {
-    .modern-project-card { flex-basis: 300px; }
+    .modern-project-card { flex-basis: 340px; }
 }
 
 @media screen and (max-width: 768px) {

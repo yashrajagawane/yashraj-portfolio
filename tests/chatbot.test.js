@@ -232,17 +232,17 @@ test('supplied social links are wired in homepage and contact sections', () => {
 test('project technology badges are hidden while cards keep consistent sizing', () => {
     const css = fs.readFileSync('assets/css/style.css', 'utf8');
     assert.match(css, /\.project-tech-stack/);
-    assert.match(css, /\.modern-project-card[\s\S]*height:\s*100%/);
+    assert.match(css, /\.modern-project-card[\s\S]*height:\s*auto/);
 });
 
-test('project action links stay aligned at the card bottom', () => {
+test('project action links follow the content without a spacer', () => {
     const css = fs.readFileSync('assets/css/style.css', 'utf8');
-    assert.match(css, /\.project-links[\s\S]*margin-top:\s*auto/);
+    assert.match(css, /\.project-links[\s\S]*margin-top:\s*0/);
 });
 
 test('project descriptions reserve a shared height for aligned actions', () => {
     const css = fs.readFileSync('assets/css/style.css', 'utf8');
-    assert.match(css, /\.project-header[\s\S]*min-height:\s*240px/);
+    assert.match(css, /\.project-header[\s\S]*min-height:\s*0/);
 });
 
 test('projects use a horizontal snapping carousel layout', () => {
@@ -250,7 +250,7 @@ test('projects use a horizontal snapping carousel layout', () => {
     assert.match(css, /\.projects-grid-modern[\s\S]*display:\s*flex/);
     assert.match(css, /overflow-x:\s*auto/);
     assert.match(css, /scroll-snap-type:\s*x\s+mandatory/);
-    assert.match(css, /\.modern-project-card[\s\S]*flex:\s*0\s+0\s+320px/);
+    assert.match(css, /\.modern-project-card[\s\S]*flex:\s*0\s+0\s+380px/);
 });
 
 test('metrics snapshot is aggregate-only and resettable', () => {
