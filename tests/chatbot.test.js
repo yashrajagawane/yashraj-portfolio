@@ -253,6 +253,17 @@ test('projects use a horizontal snapping carousel layout', () => {
     assert.match(css, /\.modern-project-card[\s\S]*flex:\s*0\s+0\s+380px/);
 });
 
+test('project carousel shows an exploration hint instead of a result counter', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    const css = fs.readFileSync('assets/css/style.css', 'utf8');
+    const script = fs.readFileSync('assets/js/script.js', 'utf8');
+    assert.match(html, /Swipe to explore/);
+    assert.doesNotMatch(html, /projects-count|Showing all/);
+    assert.doesNotMatch(html, /No projects in this category yet/);
+    assert.doesNotMatch(script, /updateCount|projects-count|projects-empty/);
+    assert.match(css, /\.scroll-hint/);
+});
+
 test('metrics snapshot is aggregate-only and resettable', () => {
     const metrics = createMetrics({ now: () => 1700000000000 });
     metrics.recordRequest();

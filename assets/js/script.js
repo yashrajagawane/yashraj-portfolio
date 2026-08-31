@@ -669,8 +669,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
     const grid = section.querySelector('.projects-grid-modern');
     const cards = [...section.querySelectorAll('.modern-project-card')];
     const filterBtns = [...section.querySelectorAll('.project-filter-btn')];
-    const countEl = section.querySelector('.projects-count');
-    const emptyEl = section.querySelector('.projects-empty');
     if (!grid || !cards.length) return;
 
     const CATEGORY_META = {
@@ -798,13 +796,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
     });
 
     // ---- Filtering ----
-    const updateCount = (filter, n) => {
-        if (!countEl) return;
-        countEl.innerHTML = filter === 'all'
-            ? `Showing all <b>${n}</b> projects`
-            : `Showing <b>${n}</b> ${labelFor(filter)} project${n === 1 ? '' : 's'}`;
-    };
-
     const animateIn = (visible) => {
         visible.forEach((card, i) => {
             card.classList.remove('is-animating-in');
@@ -822,8 +813,6 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
             card.classList.toggle('is-hidden', !match);
             if (match) visible.push(card);
         });
-        if (emptyEl) emptyEl.hidden = visible.length !== 0;
-        updateCount(filter, visible.length);
         if (animate) animateIn(visible);
     };
 

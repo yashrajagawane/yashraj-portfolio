@@ -1031,38 +1031,29 @@ min-width:0;
     transform: none !important;
 }
 
-/* ==========================
-   PROJECTS RESULT COUNT + EMPTY STATE
-========================== */
-.projects-count {
-    text-align: center;
-    margin-top: 1.75rem;
-    color: var(--text-secondary, #b0b0b0);
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    font-family: var(--font-mono);
-}
-
-.projects-count b {
-    color: var(--accent-secondary, #ff7a7a);
-    font-weight: 600;
-}
-
-.projects-empty {
+/* Horizontal carousel hint */
+.scroll-hint {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 0.6rem;
-    max-width: 1200px;
-    margin: 1rem auto 0;
-    padding: 3rem 1rem;
+    margin: 1.25rem 0 0;
     color: var(--text-secondary, #b0b0b0);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.75;
 }
 
-.projects-empty i {
-    font-size: 2rem;
-    color: rgba(255, 122, 122, 0.5);
+.scroll-hint i {
+    color: var(--accent-primary, #ff3b3b);
+    font-size: 1rem;
+    animation: slideRight 1.5s infinite ease-in-out;
+}
+
+@keyframes slideRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
 }
 
 /* ==========================
