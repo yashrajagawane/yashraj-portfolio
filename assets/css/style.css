@@ -942,6 +942,7 @@ min-width:0;
 
 /* Project Header (Title & Description) */
 .project-header {
+    min-height: 240px;
     margin-bottom: 1.2rem;
 }
 
@@ -953,9 +954,9 @@ min-width:0;
 }
 
 .project-header p {
-    font-size: 0.9rem; /* Scaled down paragraph */
+    font-size: 0.85rem;
     color: var(--text-secondary, #b0b0b0);
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
 /* Tech Stack Container */
