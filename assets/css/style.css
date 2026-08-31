@@ -1588,6 +1588,7 @@ min-width:0;
     overflow-wrap: anywhere;
 }
 .chatbot-message-assistant { align-self: flex-start; background: rgba(255, 255, 255, 0.05); border-top-left-radius: 4px; }
+.chatbot-message-assistant { max-width: 94%; }
 .chatbot-message-user { align-self: flex-end; background: rgba(255, 59, 59, 0.16); border-color: rgba(255, 122, 122, 0.3); border-top-right-radius: 4px; }
 .chatbot-message-error { align-self: flex-start; color: #fecaca; background: rgba(127, 29, 29, 0.3); border-color: rgba(248, 113, 113, 0.35); }
 .chatbot-message-loading { color: var(--text-secondary); animation: chatbotPulse 1.1s ease-in-out infinite; }

@@ -401,7 +401,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
 
     const renderAssistantMarkdown = (message, text) => {
         const fragment = document.createDocumentFragment();
-        const inlinePattern = /(\*\*[^*]+\*\*|__[^_]+__|\[([^\]]+)\]\((https?:\/\/[^\s)]+|#[^\s)]+|mailto:[^\s)]+)\))/g;
+        const inlinePattern = /(\*\*[^*]+\*\*|__[^_]+__|\[([^\]]+)\]\((https?:\/\/[^\s)]+|#[^\s)]+|mailto:[^\s)]+)\)|(https?:\/\/[^\s<]+|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}))/g;
         text.split('\n').forEach((line, index) => {
             if (index > 0) fragment.appendChild(document.createElement('br'));
             const lineContainer = document.createElement('span');
@@ -415,7 +415,7 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
                 lineContainer.appendChild(bullet);
             }
             let cursor = 0;
-            content.replace(inlinePattern, (match, token, linkText, href, offset) => {
+            content.replace(inlinePattern, (match, token, linkText, href, bareLink, offset) => {
                 lineContainer.appendChild(document.createTextNode(content.slice(cursor, offset)));
                 if (token.startsWith('**') || token.startsWith('__')) {
                     const strong = document.createElement('strong');
@@ -423,9 +423,10 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
                     lineContainer.appendChild(strong);
                 } else {
                     const link = document.createElement('a');
-                    link.href = href;
-                    link.textContent = linkText;
-                    if (/^https?:/.test(href)) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+                    const destination = href || (bareLink.includes('@') && !bareLink.startsWith('http') ? `mailto:${bareLink}` : bareLink);
+                    link.href = destination.replace(/[),.;]+$/, '');
+                    link.textContent = linkText || bareLink;
+                    if (/^https?:/.test(destination)) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
                     lineContainer.appendChild(link);
                 }
                 cursor = offset + match.length;
