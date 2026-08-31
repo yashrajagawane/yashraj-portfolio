@@ -229,6 +229,12 @@ test('supplied social links are wired in homepage and contact sections', () => {
     assert.equal((html.match(/https:\/\/t\.me\/\+917058400490/g) || []).length, 2);
 });
 
+test('project technology badges are hidden while cards keep consistent sizing', () => {
+    const css = fs.readFileSync('assets/css/style.css', 'utf8');
+    assert.match(css, /\.project-tech-stack[\s\S]*display:\s*none/);
+    assert.match(css, /\.modern-project-card[\s\S]*min-height:\s*600px/);
+});
+
 test('metrics snapshot is aggregate-only and resettable', () => {
     const metrics = createMetrics({ now: () => 1700000000000 });
     metrics.recordRequest();

@@ -885,6 +885,7 @@ min-width:0;
     position: relative;
     overflow: hidden;
     height: auto; 
+    min-height: 600px;
     align-self: stretch; /* Ensures all cards stretch to match the tallest one */
     background: var(--card-bg, rgba(255, 255, 255, 0.03));
     border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
@@ -956,7 +957,7 @@ min-width:0;
 
 /* Tech Stack Container */
 .project-tech-stack {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     gap: 0.4rem; /* Tighter gap for smaller tags */
     margin-bottom: 1.5rem;
