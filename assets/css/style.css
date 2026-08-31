@@ -852,19 +852,27 @@ min-width:0;
    FEATURED PROJECTS SECTION (HORIZONTAL CAROUSEL)
 ========================== */
 
-/* Responsive Grid Layout */
+/* Horizontal project carousel */
 .projects-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
     gap: 1.75rem;
-    max-width: 1200px;
-    margin: 1rem auto 0;
+    margin: 1rem 0 0;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+.projects-grid-modern::-webkit-scrollbar { display: none; }
 
 /* Modern Project Card Styling */
 .modern-project-card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1062,7 +1070,6 @@ min-width:0;
 ========================== */
 @media screen and (max-width: 768px) {
     .projects-grid-modern {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         gap: 1.25rem;
     }
     .project-filters {
@@ -1074,10 +1081,12 @@ min-width:0;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .projects-grid-modern {
-        grid-template-columns: 1fr;
-    }
+@media screen and (max-width: 1200px) {
+    .modern-project-card { flex-basis: 300px; }
+}
+
+@media screen and (max-width: 768px) {
+    .modern-project-card { flex-basis: 85vw; scroll-snap-align: center; }
 }
 
 
