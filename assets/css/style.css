@@ -994,7 +994,7 @@ min-width:0;
 .project-links {
     display: flex;
     gap: 0.8rem; /* Scaled down gap between buttons */
-    margin-top: auto; /* Ensures buttons align at the bottom */
+    margin-top: 0;
 }
 
 /* Shrink standard buttons slightly for these cards */

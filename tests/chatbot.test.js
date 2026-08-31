@@ -235,6 +235,12 @@ test('project technology badges are hidden while cards keep consistent sizing', 
     assert.match(css, /\.modern-project-card[\s\S]*min-height:\s*600px/);
 });
 
+test('project action links do not create an automatic spacer', () => {
+    const css = fs.readFileSync('assets/css/style.css', 'utf8');
+    assert.match(css, /\.project-links[\s\S]*margin-top:\s*0/);
+    assert.doesNotMatch(css, /\.project-links[\s\S]*margin-top:\s*auto/);
+});
+
 test('metrics snapshot is aggregate-only and resettable', () => {
     const metrics = createMetrics({ now: () => 1700000000000 });
     metrics.recordRequest();
