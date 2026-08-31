@@ -232,7 +232,7 @@ test('supplied social links are wired in homepage and contact sections', () => {
 test('project technology badges are hidden while cards keep consistent sizing', () => {
     const css = fs.readFileSync('assets/css/style.css', 'utf8');
     assert.match(css, /\.project-tech-stack[\s\S]*display:\s*none/);
-    assert.match(css, /\.modern-project-card[\s\S]*min-height:\s*600px/);
+    assert.match(css, /\.modern-project-card[\s\S]*align-self:\s*stretch/);
 });
 
 test('project action links do not create an automatic spacer', () => {
