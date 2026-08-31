@@ -243,7 +243,7 @@ test('project action links do not create an automatic spacer', () => {
 
 test('project descriptions reserve a shared height for aligned actions', () => {
     const css = fs.readFileSync('assets/css/style.css', 'utf8');
-    assert.match(css, /\.project-header[\s\S]*min-height:\s*260px/);
+    assert.match(css, /\.project-header[\s\S]*min-height:\s*240px/);
 });
 
 test('metrics snapshot is aggregate-only and resettable', () => {
