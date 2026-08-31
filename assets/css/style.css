@@ -852,43 +852,47 @@ min-width:0;
    FEATURED PROJECTS SECTION (HORIZONTAL CAROUSEL)
 ========================== */
 
-/* Main Flex Layout for Horizontal Scrolling */
+/* Responsive Grid Layout */
 .projects-grid-modern {
-    display: flex;
-    gap: 1.5rem; /* Reduced gap for smaller cards */
-    margin-top: 1rem; /* Adjusted to balance the new top padding */
-    padding-top: 1rem; /* ADDED: Gives room for the card to hover up without getting cut off */
-    padding-bottom: 2.5rem; /* Breathing room for the custom scrollbar */
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory; /* Premium native-app snapping effect */
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-/* Hide the scrollbar completely but keep scrolling functionality */
-.projects-grid-modern::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.75rem;
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 /* Modern Project Card Styling */
 .modern-project-card {
-    flex: 0 0 320px; /* Reduced width for smaller, balanced cards */
-    scroll-snap-align: start; /* Snaps exactly to the left edge of each card */
-    scroll-snap-stop: always; /* Crucial: Forces scrolling to stop one card at a time */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1.2rem; /* Reduced padding for smaller card */
+    padding: 1.2rem;
     position: relative;
     overflow: hidden;
-    height: auto; 
-    align-self: stretch; /* Ensures all cards stretch to match the tallest one */
+    height: 100%;
+    cursor: pointer;
     background: var(--card-bg, rgba(255, 255, 255, 0.03));
     border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 16px;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+}
+
+/* Filtering: cards not in the active category are pulled from the grid */
+.modern-project-card.is-hidden {
+    display: none;
+}
+
+/* Entrance / re-filter animation (staggered via inline delay from JS) */
+.modern-project-card.is-animating-in {
+    animation: cardFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .modern-project-card:hover {
@@ -992,8 +996,11 @@ min-width:0;
 /* Project Action Links */
 .project-links {
     display: flex;
-    gap: 0.8rem; /* Scaled down gap between buttons */
-    margin-top: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem; /* Scaled down gap between buttons */
+    margin-top: auto; /* Pins the action row to the bottom so cards align */
+    padding-top: 0.6rem;
 }
 
 /* Shrink standard buttons slightly for these cards */
@@ -1016,61 +1023,341 @@ min-width:0;
 }
 
 /* ==========================
-   HORIZONTAL SCROLL HINT (NEW)
+   PROJECTS RESULT COUNT + EMPTY STATE
 ========================== */
-.scroll-hint {
+.projects-count {
+    text-align: center;
+    margin-top: 1.75rem;
+    color: var(--text-secondary, #b0b0b0);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    font-family: var(--font-mono);
+}
+
+.projects-count b {
+    color: var(--accent-secondary, #ff7a7a);
+    font-weight: 600;
+}
+
+.projects-empty {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     gap: 0.6rem;
-    margin-top: 1.5rem;
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    padding: 3rem 1rem;
     color: var(--text-secondary, #b0b0b0);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    opacity: 0.7;
-    animation: pulseFade 2.5s infinite ease-in-out;
+    font-size: 0.95rem;
 }
 
-.scroll-hint i {
-    color: var(--accent-primary, #ff3b3b);
-    font-size: 1rem;
-    animation: slideRight 1.5s infinite ease-in-out;
-}
-
-/* Animations for the hint */
-@keyframes slideRight {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(8px); }
-}
-
-@keyframes pulseFade {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
+.projects-empty i {
+    font-size: 2rem;
+    color: rgba(255, 122, 122, 0.5);
 }
 
 /* ==========================
-   RESPONSIVE DESIGN (HORIZONTAL PROJECTS)
+   RESPONSIVE DESIGN (PROJECTS GRID)
 ========================== */
-@media screen and (max-width: 1200px) {
-    .modern-project-card {
-        flex: 0 0 300px; /* Slightly smaller width for tablets */
-    }
-}
-
 @media screen and (max-width: 768px) {
-    .modern-project-card {
-        flex: 0 0 85vw; /* Almost full screen width for mobile */
-        scroll-snap-align: center; /* Centers the card on mobile screen for better UX */
-    }
-    
     .projects-grid-modern {
-        gap: 1rem; /* Smaller gap on mobile */
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.25rem;
+    }
+    .project-filters {
+        gap: 0.4rem;
+    }
+    .project-filter-btn {
+        font-size: 0.78rem;
+        padding: 0.45rem 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .projects-grid-modern {
+        grid-template-columns: 1fr;
     }
 }
 
 
+
+/* ==========================
+   PROJECT FILTER TABS
+========================== */
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    max-width: 900px;
+    margin: 0 auto 0.5rem;
+}
+
+.project-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    color: var(--text-secondary, #b0b0b0);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease,
+                box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.project-filter-btn:hover {
+    color: #fff;
+    border-color: rgba(255, 59, 59, 0.45);
+    transform: translateY(-2px);
+}
+
+.project-filter-btn:focus-visible {
+    outline: 2px solid var(--accent-primary, #ff3b3b);
+    outline-offset: 2px;
+}
+
+.project-filter-btn.is-active {
+    color: #fff;
+    background: var(--accent-gradient);
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(255, 59, 59, 0.3);
+}
+
+.project-filter-btn .filter-count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1;
+    padding: 0.15rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.25);
+    color: inherit;
+    opacity: 0.85;
+}
+
+.project-filter-btn.is-active .filter-count {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* ==========================
+   CARD CATEGORY BADGE + DETAILS
+========================== */
+.project-category-badge {
+    position: absolute;
+    top: 1.55rem;
+    left: 1.55rem;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(5, 5, 5, 0.55);
+    border: 1px solid rgba(255, 122, 122, 0.35);
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: none;
+}
+
+.project-category-badge i {
+    color: var(--accent-secondary, #ff7a7a);
+    font-size: 0.7rem;
+}
+
+.project-details-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto; /* Push the details affordance to the right end */
+    padding: 0.4rem 0.6rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary, #b0b0b0);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.project-details-btn i { transition: transform 0.25s ease; }
+.project-details-btn:hover { color: var(--accent-secondary, #ff7a7a); }
+.project-details-btn:hover i { transform: translateX(3px); }
+
+.project-details-btn:focus-visible {
+    outline: 2px solid var(--accent-primary, #ff3b3b);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* Subtle "clickable" cue over the card image on hover */
+.project-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 59, 59, 0) 55%, rgba(255, 59, 59, 0.22) 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.project-image-container { position: relative; }
+.modern-project-card:hover .project-image-container::after { opacity: 1; }
+
+/* ==========================
+   PROJECT DETAIL MODAL
+========================== */
+.project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+.project-modal[hidden] { display: none; }
+
+.project-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 3, 3, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.project-modal.is-open .project-modal-overlay { opacity: 1; }
+
+.project-modal-panel {
+    position: relative;
+    z-index: 1;
+    width: min(680px, 100%);
+    max-height: min(88vh, 760px);
+    overflow-y: auto;
+    padding: 0;
+    border: 1px solid rgba(255, 59, 59, 0.25);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(20,10,10,0.96), rgba(8,8,8,0.98));
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(255,59,59,0.12);
+    transform: translateY(24px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
+}
+.project-modal.is-open .project-modal-panel { transform: translateY(0) scale(1); opacity: 1; }
+.project-modal-panel::-webkit-scrollbar { width: 8px; }
+.project-modal-panel::-webkit-scrollbar-thumb { background: rgba(255,59,59,0.4); border-radius: 8px; }
+
+.project-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(5,5,5,0.6);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.project-modal-close:hover { background: var(--accent-primary,#ff3b3b); transform: rotate(90deg); border-color: transparent; }
+.project-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.project-modal-media {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+}
+.project-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-modal-media::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(8,8,8,0) 40%, rgba(8,8,8,0.95) 100%);
+}
+.project-modal-badge {
+    position: absolute;
+    bottom: 1rem; left: 1.7rem;
+    z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    color: #fff;
+    background: rgba(255,59,59,0.18);
+    border: 1px solid rgba(255,122,122,0.4);
+    border-radius: 999px;
+}
+.project-modal-badge i { color: var(--accent-secondary,#ff7a7a); }
+
+.project-modal-body { padding: 1.5rem 1.7rem 1.9rem; }
+.project-modal-body h3 {
+    font-size: 1.5rem;
+    color: var(--accent-primary,#ff3b3b);
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+}
+.project-modal-desc {
+    color: var(--text-secondary,#b0b0b0);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.4rem;
+}
+.project-modal-tech-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8a8a8a;
+    margin-bottom: 0.7rem;
+}
+.project-modal-tech {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1.7rem;
+}
+.project-modal-tech .tech-tag { color: #e8e8e8; }
+.project-modal-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+/* Lock background scroll while the modal is open */
+body.project-modal-open { overflow: hidden; }
+
+@media screen and (max-width: 600px) {
+    .project-modal { padding: 0; align-items: flex-end; }
+    .project-modal-panel {
+        width: 100%;
+        max-height: 92vh;
+        border-radius: 20px 20px 0 0;
+    }
+    .project-modal-media { height: 190px; border-radius: 20px 20px 0 0; }
+    .project-modal-body { padding: 1.2rem 1.2rem 1.6rem; }
+    .project-modal-body h3 { font-size: 1.25rem; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .modern-project-card.is-animating-in { animation: none; }
+    .project-modal-panel,
+    .project-modal-overlay,
+    .project-filter-btn,
+    .modern-project-card,
+    .project-image-container img,
+    .project-modal-close { transition: none; }
+    .project-modal-panel { transform: none; }
+}
 
 /* ==========================
    EXPERIENCE SECTION

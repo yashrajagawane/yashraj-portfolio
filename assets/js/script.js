@@ -661,3 +661,193 @@ if (chatbot && chatbotLauncher && chatbotPanel && chatbotMessages && chatbotForm
         if (event.key === 'Escape' && !chatbotPanel.hidden) setChatbotOpen(false);
     });
 }
+
+/* === PROJECTS: FILTERABLE GRID + DETAIL MODAL === */
+(() => {
+    const section = document.getElementById('projects');
+    if (!section) return;
+    const grid = section.querySelector('.projects-grid-modern');
+    const cards = [...section.querySelectorAll('.modern-project-card')];
+    const filterBtns = [...section.querySelectorAll('.project-filter-btn')];
+    const countEl = section.querySelector('.projects-count');
+    const emptyEl = section.querySelector('.projects-empty');
+    if (!grid || !cards.length) return;
+
+    const CATEGORY_META = {
+        'ai-ml':      { label: 'AI / ML',    icon: 'fa-brain' },
+        'full-stack': { label: 'Full-Stack', icon: 'fa-layer-group' },
+        'games':      { label: 'Games',      icon: 'fa-gamepad' },
+        'systems':    { label: 'Systems',    icon: 'fa-microchip' }
+    };
+    const labelFor = (key) => (CATEGORY_META[key] && CATEGORY_META[key].label) || key;
+
+    // Enhance each card: category badge + a keyboard-accessible "Details" trigger
+    cards.forEach(card => {
+        const primary = (card.dataset.category || '').split(' ')[0];
+        const meta = CATEGORY_META[primary];
+        if (meta && !card.querySelector('.project-category-badge')) {
+            const badge = document.createElement('span');
+            badge.className = 'project-category-badge';
+            badge.innerHTML = `<i class="fas ${meta.icon}" aria-hidden="true"></i>${meta.label}`;
+            card.prepend(badge);
+        }
+        const links = card.querySelector('.project-links');
+        const title = card.querySelector('.project-header h3')?.textContent.trim() || 'project';
+        if (links && !links.querySelector('.project-details-btn')) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'project-details-btn';
+            btn.innerHTML = 'Details <i class="fas fa-arrow-right" aria-hidden="true"></i>';
+            btn.setAttribute('aria-label', `View details for ${title}`);
+            links.appendChild(btn);
+        }
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('a') || e.target.closest('.disabled-btn')) return;
+            openModal(card);
+        });
+    });
+
+    // ---- Detail modal (single reusable instance) ----
+    const modal = document.createElement('div');
+    modal.className = 'project-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'project-modal-title');
+    modal.hidden = true;
+    modal.innerHTML = `
+        <div class="project-modal-overlay" data-modal-close></div>
+        <div class="project-modal-panel glass-card">
+            <button class="project-modal-close" type="button" data-modal-close aria-label="Close details"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+            <div class="project-modal-media">
+                <img alt="">
+                <span class="project-modal-badge"></span>
+            </div>
+            <div class="project-modal-body">
+                <h3 id="project-modal-title"></h3>
+                <p class="project-modal-desc"></p>
+                <div class="project-modal-tech-label">Tech Stack</div>
+                <div class="project-modal-tech"></div>
+                <div class="project-modal-links"></div>
+            </div>
+        </div>`;
+    document.body.appendChild(modal);
+
+    const modalImg = modal.querySelector('.project-modal-media img');
+    const modalBadge = modal.querySelector('.project-modal-badge');
+    const modalTitle = modal.querySelector('#project-modal-title');
+    const modalDesc = modal.querySelector('.project-modal-desc');
+    const modalTech = modal.querySelector('.project-modal-tech');
+    const modalLinks = modal.querySelector('.project-modal-links');
+    const modalPanel = modal.querySelector('.project-modal-panel');
+    let lastFocused = null;
+
+    function openModal(card) {
+        const img = card.querySelector('.project-image-container img');
+        modalImg.src = img?.src || '';
+        modalImg.alt = img?.alt || '';
+        modalTitle.textContent = card.querySelector('.project-header h3')?.textContent.trim() || '';
+        modalDesc.textContent = card.querySelector('.project-header p')?.textContent.replace(/\s+/g, ' ').trim() || '';
+
+        const primary = (card.dataset.category || '').split(' ')[0];
+        const meta = CATEGORY_META[primary];
+        modalBadge.innerHTML = meta ? `<i class="fas ${meta.icon}" aria-hidden="true"></i>${meta.label}` : '';
+        modalBadge.style.display = meta ? '' : 'none';
+
+        modalTech.replaceChildren();
+        card.querySelectorAll('.project-tech-stack .tech-tag')
+            .forEach(tag => modalTech.appendChild(tag.cloneNode(true)));
+
+        modalLinks.replaceChildren();
+        card.querySelectorAll('.project-links a')
+            .forEach(a => modalLinks.appendChild(a.cloneNode(true)));
+
+        lastFocused = document.activeElement;
+        modal.hidden = false;
+        document.body.classList.add('project-modal-open');
+        void modal.offsetWidth;                 // force reflow so the open transition runs
+        modal.classList.add('is-open');
+        modalPanel.scrollTop = 0;
+        modal.querySelector('.project-modal-close').focus({ preventScroll: true });
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.classList.remove('project-modal-open');
+        let done = false;
+        const finish = () => { if (done) return; done = true; modal.hidden = true; };
+        modalPanel.addEventListener('transitionend', finish, { once: true });
+        setTimeout(finish, 400);                 // fallback if transitionend never fires
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+            lastFocused.focus({ preventScroll: true });
+        }
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-modal-close]')) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (modal.hidden) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'Tab') {
+            const focusables = modalPanel.querySelectorAll('a[href], button:not([disabled])');
+            if (!focusables.length) return;
+            const first = focusables[0], last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+
+    // ---- Filtering ----
+    const updateCount = (filter, n) => {
+        if (!countEl) return;
+        countEl.innerHTML = filter === 'all'
+            ? `Showing all <b>${n}</b> projects`
+            : `Showing <b>${n}</b> ${labelFor(filter)} project${n === 1 ? '' : 's'}`;
+    };
+
+    const animateIn = (visible) => {
+        visible.forEach((card, i) => {
+            card.classList.remove('is-animating-in');
+            card.style.animationDelay = `${Math.min(i * 55, 400)}ms`;
+            void card.offsetWidth;
+            card.classList.add('is-animating-in');
+        });
+    };
+
+    const applyFilter = (filter, animate) => {
+        const visible = [];
+        cards.forEach(card => {
+            const cats = (card.dataset.category || '').split(' ');
+            const match = filter === 'all' || cats.includes(filter);
+            card.classList.toggle('is-hidden', !match);
+            if (match) visible.push(card);
+        });
+        if (emptyEl) emptyEl.hidden = visible.length !== 0;
+        updateCount(filter, visible.length);
+        if (animate) animateIn(visible);
+    };
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-selected', 'true');
+            applyFilter(btn.dataset.filter || 'all', true);
+        });
+    });
+
+    applyFilter('all', false);
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateIn(cards.filter(c => !c.classList.contains('is-hidden')));
+                    obs.disconnect();
+                }
+            });
+        }, { threshold: 0.12 });
+        io.observe(grid);
+    } else {
+        animateIn(cards);
+    }
+})();

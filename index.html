@@ -418,10 +418,30 @@
         <!-- PROJECT SECTION -->
         <section id="projects" class="projects-section section-padding">
         <h2 class="section-title glow-heading">Featured Projects</h2>
+
+        <!-- Category filter tabs -->
+        <div class="project-filters" role="tablist" aria-label="Filter projects by category">
+            <button class="project-filter-btn is-active" type="button" role="tab" aria-selected="true" data-filter="all">
+                <span>All</span><span class="filter-count">10</span>
+            </button>
+            <button class="project-filter-btn" type="button" role="tab" aria-selected="false" data-filter="ai-ml">
+                <span>AI / ML</span><span class="filter-count">4</span>
+            </button>
+            <button class="project-filter-btn" type="button" role="tab" aria-selected="false" data-filter="full-stack">
+                <span>Full-Stack</span><span class="filter-count">6</span>
+            </button>
+            <button class="project-filter-btn" type="button" role="tab" aria-selected="false" data-filter="games">
+                <span>Games</span><span class="filter-count">1</span>
+            </button>
+            <button class="project-filter-btn" type="button" role="tab" aria-selected="false" data-filter="systems">
+                <span>Systems</span><span class="filter-count">1</span>
+            </button>
+        </div>
+
         <div class="projects-grid-modern">
 
             <!-- PROJECT 0: HireMind AI -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="ai-ml full-stack">
                 <div class="project-image-container">
                     <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="HireMind AI Resume Intelligence Platform">
                 </div>
@@ -461,7 +481,7 @@
             </div>
 
             <!-- PROJECT: StyleHub -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="full-stack">
                 <div class="project-image-container">
                     <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80" alt="StyleHub Digital Boutique Showcase">
                 </div>
@@ -501,7 +521,7 @@
 
 
             <!-- PROJECT 3: Driver Drowsiness -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="ai-ml">
             <div class="project-image-container">
                 <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80" alt="Driver Dashboard Drowsiness Detection">
             </div>
@@ -525,7 +545,7 @@
 
 
             <!-- PROJECT 5: Ledger Expense Tracker -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="full-stack">
                 <div class="project-image-container">
                     <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80" alt="Ledger Expense Tracker">
                 </div>
@@ -567,7 +587,7 @@
             
 
             <!-- PROJECT 4: Al Fitness Coach -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="ai-ml full-stack">
             <div class="project-image-container">
                 <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80" alt="Al Fitness Coach">
             </div>
@@ -592,7 +612,7 @@
 
 
             <!-- PROJECT: Sai Vandan CRM -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="full-stack">
                 <div class="project-image-container">
                     <img src="https://images.unsplash.com/photo-1768638687896-35bde623d532?auto=format&fit=crop&w=800&q=80" alt="Sai Vandan CRM Real Estate Enterprise Dashboard">
                 </div>
@@ -635,7 +655,7 @@
 
 
             <!-- PROJECT: Tic Tac Toe -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="games">
                 <div class="project-image-container">
                     <img src="https://images.unsplash.com/photo-1773101883585-4e89e20c7321?auto=format&fit=crop&w=800&q=80" alt="Tic Tac Toe Game with AI Opponent">
                 </div>
@@ -670,7 +690,7 @@
 
 
             <!-- PROJECT: AI Travel Planner -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="full-stack">
                 <div class="project-image-container">
                     <img src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&w=800&q=80" alt="AI Travel Planner Smart Travel Planning Platform">
                 </div>
@@ -710,7 +730,7 @@
             
             
             <!-- PROJECT 1: Phonebook Directory -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="systems">
             <div class="project-image-container">
                 <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80" alt="Phonebook Directory Code">
             </div>
@@ -732,7 +752,7 @@
             </div>
 
             <!-- PROJECT 2: Disease Prediction -->
-            <div class="modern-project-card glass-card">
+            <div class="modern-project-card glass-card" data-category="ai-ml">
             <div class="project-image-container">
                 <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="Healthcare Al Prediction">
             </div>
@@ -757,9 +777,10 @@
 
 
 
-        <div class="scroll-hint">
-            <span>Swipe to explore</span>
-            <i class="fas fa-arrow-right"></i>
+        <p class="projects-count" aria-live="polite"></p>
+        <div class="projects-empty" hidden>
+            <i class="fas fa-folder-open"></i>
+            <span>No projects in this category yet.</span>
         </div>
         </section>
 
