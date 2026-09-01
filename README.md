@@ -123,7 +123,6 @@ The portfolio chatbot uses server-side Gemini and Groq providers. Copy `.env.exa
 npm test
 ```
 
-For Vercel variables and production verification, see [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md).
 
 ```bash
 git clone https://github.com/yashrajagawane/your-repo-name.git
