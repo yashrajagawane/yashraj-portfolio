@@ -250,7 +250,7 @@ test('projects use a horizontal snapping carousel layout', () => {
     assert.match(css, /\.projects-grid-modern[\s\S]*display:\s*flex/);
     assert.match(css, /overflow-x:\s*auto/);
     assert.match(css, /scroll-snap-type:\s*x\s+mandatory/);
-    assert.match(css, /\.modern-project-card[\s\S]*flex:\s*0\s+0\s+380px/);
+    assert.match(css, /\.modern-project-card[\s\S]*flex:\s*0\s+0\s+360px/);
 });
 
 test('project carousel shows an exploration hint instead of a result counter', () => {

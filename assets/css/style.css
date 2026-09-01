@@ -871,7 +871,7 @@ min-width:0;
 
 /* Modern Project Card Styling */
 .modern-project-card {
-    flex: 0 0 380px;
+    flex: 0 0 360px;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
@@ -1007,15 +1007,15 @@ min-width:0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.6rem; /* Scaled down gap between buttons */
+    gap: 0.45rem;
     margin-top: 0;
     padding-top: 0.6rem;
 }
 
 /* Shrink standard buttons slightly for these cards */
 .project-links .small-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.36rem 0.68rem;
+    font-size: 0.8rem;
 }
 
 .disabled-btn {
@@ -1178,7 +1178,7 @@ min-width:0;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-left: auto; /* Push the details affordance to the right end */
+    margin-left: 0;
     padding: 0.4rem 0.6rem;
     background: transparent;
     border: none;
