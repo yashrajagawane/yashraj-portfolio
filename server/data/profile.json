@@ -125,6 +125,14 @@
       "highlights": ["Contact storage", "Search", "Editing", "Deletion", "Sorted display"]
     },
     {
+      "name": "MyRedis – Redis-Inspired In-Memory Database",
+      "summary": "A Redis-inspired in-memory database built from scratch in Java 21 with a custom TCP server, RESP2 protocol support, virtual-thread client handling, typed storage, expiration, transactions, Pub/Sub, and durable persistence.",
+      "technologies": ["Java 21", "TCP Server", "RESP2", "Virtual Threads", "AOF & Snapshots", "Docker"],
+      "github": "https://github.com/yashrajagawane/MyRedis",
+      "liveDemo": null,
+      "highlights": ["Custom TCP server", "RESP2 protocol", "Typed data structures", "Transactions and Pub/Sub", "AOF and snapshot persistence"]
+    },
+    {
       "name": "Multiple Disease Prediction System",
       "summary": "An AI-powered healthcare web application that predicts diseases such as diabetes, heart disease, and Parkinson's using machine learning models.",
       "technologies": ["Python", "Machine Learning", "Scikit-learn", "Streamlit", "Pandas"],
