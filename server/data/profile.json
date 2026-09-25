@@ -109,6 +109,14 @@
       "highlights": ["Player versus computer", "Strategic AI opponent", "Score tracking", "Match history"]
     },
     {
+      "name": "TypeRush – Typing Speed Learning Arcade",
+      "summary": "An interactive typing-speed learning platform that combines progressive lessons, daily challenges, performance analytics, streaks, immersive audio, and four arcade minigames to help users improve their speed and accuracy.",
+      "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "PWA", "Motion"],
+      "github": "https://github.com/yashrajagawane/typerush-app",
+      "liveDemo": "https://ais-pre-wb7u3t37aroq72ctm7nibe-545718861873.asia-east1.run.app",
+      "highlights": ["50 progressive lessons", "Four arcade minigames", "Daily challenges and streaks", "WPM and accuracy analytics", "Installable PWA"]
+    },
+    {
       "name": "AI Travel Planner – Smart Travel Planning Platform",
       "summary": "A full-stack travel planning platform with secure authentication, live weather forecasting through OpenWeatherMap, and a premium glassmorphism dashboard built on a modular Flask backend designed for future AI-powered itinerary generation.",
       "technologies": ["Flask", "SQLite", "OpenWeatherMap API", "Authentication", "Glassmorphism UI", "Render"],
