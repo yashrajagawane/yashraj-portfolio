@@ -1452,19 +1452,26 @@ body.project-modal-open { overflow: hidden; }
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 3rem;
+    gap: 2rem;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.contact-info,
+.contact-form {
+    padding: 1.5rem;
 }
 
 .contact-info h3 {
     font-size: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     font-size: 1.1rem;
 }
 
@@ -1474,9 +1481,9 @@ body.project-modal-open { overflow: hidden; }
 }
 
 .contact-social {
-    margin-top: 3rem;
+    margin-top: 2rem;
     border-top: 1px solid var(--card-border);
-    padding-top: 2rem;
+    padding-top: 1.5rem;
 }
 
 .contact-social h4 {
@@ -1486,7 +1493,7 @@ body.project-modal-open { overflow: hidden; }
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .input-group {
@@ -1500,7 +1507,7 @@ body.project-modal-open { overflow: hidden; }
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--card-border);
     border-radius: 8px;
-    padding: 1.2rem;
+    padding: 1rem;
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 1rem;
