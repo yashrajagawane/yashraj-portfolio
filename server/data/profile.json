@@ -61,6 +61,14 @@
       "highlights": ["Resume analysis", "ATS improvement", "Skill-gap identification", "Career analytics", "Interview preparation"]
     },
     {
+      "name": "Bug Hunter AI – Gamified Debugging Platform",
+      "summary": "A gamified debugging platform where developers investigate real code bugs, edit and execute fixes in the browser, request contextual Gemini hints, earn XP, unlock achievements, and compete on a live leaderboard.",
+      "technologies": ["React 19", "TypeScript", "Express", "Gemini AI", "Firebase", "Monaco Editor", "Piston API"],
+      "github": "https://github.com/yashrajagawane/bug-hunter-ai",
+      "liveDemo": "https://bug-hunter-ai-m1n1.onrender.com",
+      "highlights": ["Gamified debugging cases", "Contextual AI hints", "Browser code execution", "XP and achievements", "Real-time leaderboard"]
+    },
+    {
       "name": "StyleHub – Digital Boutique Showcase & Inventory Platform",
       "summary": "A production-ready digital showroom and inventory back-office for a physical clothing boutique. Customers can browse and shortlist products, then call, message, or visit the store, while the owner manages the catalogue, CMS, and analytics from an admin dashboard.",
       "technologies": ["React 19", "FastAPI", "MongoDB", "Tailwind CSS", "TanStack Query", "Admin Dashboard"],
